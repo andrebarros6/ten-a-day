@@ -1,0 +1,218 @@
+{
+  "nav": {
+    "label": "Sections",
+    "today": "Today",
+    "supplements": "Supplements",
+    "about": "About"
+  },
+  "masthead": {
+    "sub": "A daily checklist for the ten protocols Andrew Huberman set out on The Diary Of A CEO, with the research behind each one. Unofficial.",
+    "streak": "Streak",
+    "day": "day",
+    "days": "days"
+  },
+  "times": {
+    "wake": "I wake at",
+    "bed": "I go to bed at",
+    "hint": "Every time below is worked out from these two. Nine of the ten are daily; training has one rest day a week."
+  },
+  "rhythm": {
+    "caption": "The idea the ten hang on: push cortisol high early so it is low at night, when melatonin takes over. Schematic shape, not a measurement of you.",
+    "aria": "Schematic of cortisol peaking after waking and melatonin peaking during sleep, with the current time marked",
+    "cortisol": "cortisol",
+    "melatonin": "melatonin",
+    "now": "now",
+    "asleep": "asleep"
+  },
+  "windows": {
+    "anyTime": "Any time",
+    "atMeals": "At meals",
+    "hints": {
+      "1": "Within 30 minutes of waking",
+      "2": "In your first hour",
+      "3": "In your first 3 hours",
+      "4": "One block, best after training",
+      "5": "When stress spikes",
+      "6": "Last third of your day, before dark",
+      "7": "Screens off by {time}",
+      "8": "All night",
+      "9": "Walk 5–10 minutes after eating",
+      "10": "Once a day. He does it before sleep"
+    }
+  },
+  "today": {
+    "now": "Now",
+    "more": "How and why, No. {n}",
+    "scoreLabel": "Today",
+    "scoreIdle": "A day counts toward your streak at {keep} of 10.",
+    "scoreKept": "Today counts toward your streak.",
+    "scoreMore": "{n} more and today counts toward your streak.",
+    "weekLabel": "Last 7 days",
+    "weekAria": "Protocols completed on each of the last seven days",
+    "saved": "Your ticks are saved on this device."
+  },
+  "share": {
+    "label": "Share today",
+    "copy": "Copy result",
+    "note": "Paste it to a friend and ask for theirs. Doing this with one other person is the easiest way to keep going.",
+    "copied": "Copied",
+    "selected": "Selected. Copy it from here.",
+    "listLine": "Water, light, training, focus, sigh, late light, dim evening, dark sleep, food + walk, quiet time.",
+    "question": "What's yours?"
+  },
+  "protocol": {
+    "num": "Protocol {nn} of 10",
+    "evidence": "Evidence:",
+    "evidenceTitle": "How well the research supports this protocol",
+    "levels": { "strong": "Strong", "moderate": "Moderate", "early": "Early" },
+    "doThis": "Do this",
+    "badDay": "On a bad day:",
+    "why": "Why it works",
+    "research": "What the research says",
+    "watchOut": "Watch out",
+    "markDone": "Mark done today",
+    "undo": "Done today. Undo",
+    "episodeAt": "In the episode at"
+  },
+  "pacer": {
+    "label": "Breathe with it",
+    "idle": "Three rounds, about 30 seconds.",
+    "start": "Start",
+    "stop": "Stop",
+    "phases": ["Inhale through the nose", "Second, short inhale", "Long exhale through the mouth"],
+    "round": "(round {r} of 3)",
+    "done": "Done. Notice your heart rate.",
+    "stopped": "Stopped."
+  },
+  "eyes": {
+    "label": "Back to sleep, eyes closed",
+    "steps": [
+      "Move your eyes slowly to one side, then the other.",
+      "Up, then down.",
+      "Circle one way, then the other.",
+      "Point them gently toward your nose without crossing them.",
+      "Breathe out slowly. Repeat two or three times."
+    ]
+  },
+  "supplements": {
+    "num": "Add-on",
+    "title": "Supplements",
+    "lede": "Asked which five he would keep for life, he named four, then added caffeine and creatine.",
+    "note": "He treats supplements as extras on top of the ten, never a replacement. What follows records what he said and what the research shows. It is not a recommendation to take anything. In the episode at",
+    "timestamp": "01:59:20",
+    "dose": "Dose given:",
+    "use": "What he takes it for",
+    "research": "What the research says",
+    "watchOut": "Watch out",
+    "alsoTitle": "Also named",
+    "also": "He says the book also covers L-tyrosine, theanine with low-dose caffeine, tart cherry, apigenin and the prescription sleep drug daridorexant. He gives no doses or detail in the episode.",
+    "leftOutTitle": "Left out on purpose",
+    "leftOut": "Peptides, GLP-1 microdosing and psychedelics take up a long stretch of the episode. He says himself that they are experimental and not in his book, so they are not in this app."
+  },
+  "about": {
+    "num": "About",
+    "title": "Where this comes from",
+    "intro": "The ten protocols and the supplement list follow the episode of The Diary Of A CEO with Andrew Huberman released on 3 September 2026, where he walks through ten practices from his book Protocols. The wording here is a summary, not a transcript. This app is not affiliated with Andrew Huberman, Steven Bartlett or their companies.",
+    "episodeLink": "Listen to the episode",
+    "episodeUrl": "https://open.spotify.com/episode/1jtTjklF331gB4TJXty31Q",
+    "factCheckLink": "The show's own independent fact check",
+    "factCheckUrl": "https://stevenbartlett.com/wp-content/uploads/2026/09/DOAC-Prof-Andrew-Huberman-Independent-Research-Further-Reading-v2.1.pdf",
+    "ratingsTitle": "How the evidence ratings work",
+    "ratingsNote": "The studies listed were chosen for this app as the closest published research to each claim. They are not the reference list from his book. Each link opens a search for the paper by its title.",
+    "confirmTitle": "Still to confirm",
+    "confirm": [
+      "He numbers protocols 1, 2, 3, 5, 6 and 10 out loud. The host calls the focus block number 4, and 7 and 8 are named together as the evening and night protocols. He says nutrition is one of the ten but never gives its number, so No. 9 is the slot left over.",
+      "Side sleeping, supplements and the walk after meals came up as the host's closing questions. They sit here under the protocol they fit best.",
+      "The study figures have not all been checked against the papers yet."
+    ],
+    "medicalTitle": "Not medical advice",
+    "medical": "This is general information for healthy adults. It does not replace advice from a clinician who knows you. Check with one before changing exercise, diet, light exposure or supplements if you are pregnant, take medication or have a health condition.",
+    "sourceTitle": "Open source",
+    "source": "The code is public under the MIT licence. You can read it, run your own copy or suggest a correction.",
+    "sourceLink": "Source code on GitHub"
+  },
+  "footer": {
+    "disclaimer": "Unofficial. Not affiliated with Andrew Huberman, Steven Bartlett or their companies. General information for healthy adults, not medical advice.",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "source": "Source"
+  },
+  "theme": {
+    "label": "Theme",
+    "system": "Auto",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "privacy": {
+    "num": "Privacy",
+    "title": "Your data stays on your device",
+    "sections": [
+      {
+        "title": "What is stored",
+        "body": [
+          "Your wake time, your bed time and which protocols you ticked on which day, for up to 180 days. Your theme choice. A random code for your share link, and the code of the link you arrived through if there was one.",
+          "All of it is kept in this browser's local storage. None of it is sent to a server, because this app has no server that accepts data."
+        ]
+      },
+      {
+        "title": "What is not collected",
+        "body": [
+          "No account, name or email address. No analytics, advertising or tracking scripts. No cookies. Fonts are served from the same site as the app, so no request goes to a font provider."
+        ]
+      },
+      {
+        "title": "Who else sees a request",
+        "body": [
+          "Whoever hosts a copy of this app can see ordinary web server logs, such as IP address and the page requested, as with any website. Links to studies and to the episode open other sites, which have their own policies."
+        ]
+      },
+      {
+        "title": "Sharing",
+        "body": [
+          "The share text is copied to your clipboard and goes only where you paste it. It contains your score, your streak and your share code."
+        ]
+      }
+    ],
+    "deleteTitle": "Delete your data",
+    "deleteBody": "This removes your times, every tick and your share code from this browser. It cannot be undone. Data in other browsers or devices is not affected, because they do not share anything.",
+    "deleteButton": "Delete my data on this device",
+    "deleteConfirm": "Delete all Ten a Day data stored in this browser?",
+    "deleted": "Deleted. Nothing from this app is stored in this browser now."
+  },
+  "terms": {
+    "num": "Terms",
+    "title": "Terms of use",
+    "sections": [
+      {
+        "title": "What this is",
+        "body": [
+          "Ten a Day is a free, unofficial checklist and reading list. It is not affiliated with, endorsed by or connected to Andrew Huberman, Steven Bartlett or their companies. All text is an original summary."
+        ]
+      },
+      {
+        "title": "Not medical advice",
+        "body": [
+          "The content is general information for healthy adults. It does not replace advice from a clinician who knows you. Check with one before changing exercise, diet, light exposure or supplements if you are pregnant, take medication or have a health condition. The supplements page records what was said in the episode and what the research shows. It is not a recommendation to take anything."
+        ]
+      },
+      {
+        "title": "Accuracy",
+        "body": [
+          "The summaries and study figures are compiled in good faith and may contain errors. Not every figure has been checked against the original paper yet. Read the papers before relying on any number."
+        ]
+      },
+      {
+        "title": "No warranty",
+        "body": [
+          "The app is provided as is, without warranty of any kind. You use it at your own risk. To the extent the law allows, the authors are not liable for any loss or harm arising from its use. Your data is stored only in your browser and can be lost if you clear it."
+        ]
+      },
+      {
+        "title": "Licence",
+        "body": [
+          "The source code is available under the MIT licence."
+        ]
+      }
+    ]
+  }
+}
