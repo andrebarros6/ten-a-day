@@ -1,0 +1,380 @@
+@import "tailwindcss";
+
+/* Layout: one narrow app column under a sticky tab strip. Today is a time-ordered
+   list hung on a rail that carries the day's light from dawn to night. */
+:root {
+  --bg: #f1f4f7;
+  --surface: #ffffff;
+  --ink: #15212c;
+  --muted: #52616e;
+  --line: #d3dbe2;
+  --accent: #b8460e;
+  --accent-soft: #fbe7da;
+  --done: #1b7a66;
+  --mel: #3f47b5;
+  --sleep: #e2e6f3;
+  --dawn: #f0a24f;
+  --noon: #86c3e8;
+  --dusk: #d4728a;
+  --night: #2a2e6e;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d151e;
+    --surface: #15202b;
+    --ink: #e7edf2;
+    --muted: #9baab7;
+    --line: #2a3947;
+    --accent: #ff9b52;
+    --accent-soft: #3a2415;
+    --done: #53c7a9;
+    --mel: #a3abff;
+    --sleep: #1a2140;
+    --night: #4a50b0;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d151e;
+  --surface: #15202b;
+  --ink: #e7edf2;
+  --muted: #9baab7;
+  --line: #2a3947;
+  --accent: #ff9b52;
+  --accent-soft: #3a2415;
+  --done: #53c7a9;
+  --mel: #a3abff;
+  --sleep: #1a2140;
+  --night: #4a50b0;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-done: var(--done);
+  --color-mel: var(--mel);
+  --color-sleep: var(--sleep);
+  --color-dawn: var(--dawn);
+  --color-noon: var(--noon);
+  --color-dusk: var(--dusk);
+  --color-night: var(--night);
+
+  /* shadcn/ui names, pointed at the tokens above so added components inherit the theme. */
+  --color-background: var(--bg);
+  --color-foreground: var(--ink);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--ink);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--ink);
+  --color-primary: var(--ink);
+  --color-primary-foreground: var(--bg);
+  --color-secondary: var(--surface);
+  --color-secondary-foreground: var(--ink);
+  --color-muted-foreground: var(--muted);
+  --color-accent-foreground: var(--bg);
+  --color-border: var(--line);
+  --color-input: var(--line);
+  --color-ring: var(--accent);
+  --radius-md: 5px;
+
+  --font-display: var(--font-bricolage), "Avenir Next Condensed", "Segoe UI", system-ui, sans-serif;
+  --font-sans: var(--font-plex-sans), "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+@layer base {
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+    line-height: 1.12;
+  }
+  button {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .mono {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+  .note {
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .panel {
+    display: grid;
+    gap: 26px;
+    padding-top: 24px;
+  }
+  .panel > * {
+    min-width: 0;
+  }
+
+  /* tab strip */
+  .tabs-scroll {
+    scrollbar-width: none;
+  }
+  .tabs-scroll::-webkit-scrollbar {
+    display: none;
+  }
+  .tab {
+    flex: none;
+    border-bottom: 3px solid transparent;
+    padding: 9px 11px 8px;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--muted);
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .tab:hover,
+  .tab[aria-current="page"] {
+    color: var(--ink);
+  }
+  .tab[aria-current="page"] {
+    border-bottom-color: var(--accent);
+  }
+  .tab .n {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    margin-right: 5px;
+  }
+  .tab.is-done .n {
+    color: var(--done);
+  }
+
+  /* today: the list on the light rail. One continuous element, not a per-row accent. */
+  .day {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 20px;
+    position: relative;
+  }
+  .day::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    bottom: 6px;
+    width: 6px;
+    border-radius: 3px;
+    background: linear-gradient(
+      to bottom,
+      var(--dawn) 0%,
+      var(--noon) 38%,
+      var(--noon) 55%,
+      var(--dusk) 78%,
+      var(--night) 100%
+    );
+  }
+  .day > li {
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr);
+    column-gap: 10px;
+    align-items: start;
+    padding-block: 13px;
+    border-bottom: 1px solid var(--line);
+  }
+  .day > li:last-child {
+    border-bottom: 0;
+  }
+  .day input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    margin: 3px 0 0;
+    accent-color: var(--done);
+    cursor: pointer;
+  }
+  .day label {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-top: 1px;
+    cursor: pointer;
+  }
+  .day > li.is-done label {
+    color: var(--muted);
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+  }
+  .chip-now {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 1px 7px;
+    border-radius: 3px;
+  }
+
+  /* last 7 days */
+  .week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    align-items: end;
+    height: 92px;
+  }
+  .week .col {
+    display: grid;
+    grid-template-rows: 1fr auto auto;
+    gap: 3px;
+    height: 100%;
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .week .bar-wrap {
+    display: flex;
+    align-items: flex-end;
+    border-bottom: 1px solid var(--line);
+  }
+  .week .bar {
+    width: 100%;
+    background: var(--line);
+    border-radius: 2px 2px 0 0;
+    min-height: 2px;
+  }
+  .week .col.kept .bar {
+    background: var(--done);
+  }
+  .week .col.today {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* evidence pips: always shown with the word beside them */
+  .pips {
+    display: inline-flex;
+    gap: 3px;
+  }
+  .pips i {
+    width: 9px;
+    height: 9px;
+    border: 1.5px solid var(--ink);
+    border-radius: 1px;
+    display: block;
+  }
+  .pips i.on {
+    background: var(--ink);
+  }
+
+  /* protocol and text pages */
+  .sec {
+    display: grid;
+    gap: 10px;
+    max-width: 66ch;
+  }
+  .sec h2,
+  .sec h3 {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .sec ul,
+  .sec ol {
+    margin: 0;
+    padding-left: 20px;
+    display: grid;
+    gap: 7px;
+  }
+  .sec ul {
+    list-style: disc;
+  }
+  .sec ol {
+    list-style: decimal;
+  }
+  .studies {
+    list-style: none !important;
+    padding: 0 !important;
+    gap: 14px !important;
+  }
+  .studies li {
+    display: grid;
+    gap: 2px;
+  }
+  .studies a {
+    font-weight: 500;
+    overflow-wrap: anywhere;
+  }
+  .tool {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 18px;
+    display: grid;
+    gap: 14px;
+    max-width: 66ch;
+  }
+  .tool ol {
+    margin: 0;
+    padding-left: 20px;
+    display: grid;
+    gap: 6px;
+    list-style: decimal;
+  }
+
+  /* sigh pacer */
+  .lung {
+    width: 112px;
+    height: 112px;
+    display: grid;
+    place-items: center;
+  }
+  .lung span {
+    width: 104px;
+    height: 104px;
+    border-radius: 50%;
+    background: var(--noon);
+    opacity: 0.9;
+    transform: scale(0.35);
+    transition: transform 1s linear;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lung span {
+      transition: none !important;
+      transform: scale(0.7) !important;
+    }
+  }
+}
