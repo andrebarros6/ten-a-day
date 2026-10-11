@@ -1,0 +1,640 @@
+{
+  "meta": {
+    "name": "Ten a Day",
+    "source": "The Diary Of A CEO with Steven Bartlett, episode with Andrew Huberman, released 2026-09-03",
+    "note": "All text is an original summary. Not affiliated with Andrew Huberman or Steven Bartlett.",
+    "todayOrder": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      9,
+      6,
+      7,
+      10,
+      8
+    ],
+    "streakThreshold": 7,
+    "evidenceScale": {
+      "strong": "Several human studies, including trials or very large cohorts, point the same way.",
+      "moderate": "Some good human studies, but small, single-lab, or covering only part of the claim.",
+      "early": "Animal work, observational links or personal experience."
+    }
+  },
+  "protocols": [
+    {
+      "number": 1,
+      "slug": "water",
+      "tabLabel": "Water",
+      "name": "Water on waking",
+      "summary": "Drink 500 ml to 1 L of water soon after you get up.",
+      "todayLine": "500 ml to 1 L of water, before coffee.",
+      "steps": [
+        "Drink 500 ml to 1 L (16–32 oz) of plain water within half an hour of waking. Electrolytes are optional.",
+        "Use the bathroom first, then drink. He links the pair to the body's wake-up signal.",
+        "Aim for roughly 2.4 L (80 oz) across the day, most of it before late afternoon.",
+        "Drink less in the evening so a full bladder doesn't wake you."
+      ],
+      "minimum": "One large glass before your first coffee.",
+      "tool": null,
+      "why": "Even mild dehydration dulls attention and mood. In the episode he adds a second claim: that drinking after waking helps the morning cortisol rise, through signals that travel from the gut and bladder up the vagus nerve to the brain.",
+      "evidenceLevel": "moderate",
+      "evidenceSummary": "Good support for the idea that mild dehydration hurts mood and concentration. The claim that morning water raises cortisol has no direct human trial behind it that this app could find, so treat it as his hypothesis.",
+      "studies": [
+        {
+          "citation": "Ganio et al., British Journal of Nutrition, 2011",
+          "title": "Mild dehydration impairs cognitive performance and mood of men",
+          "finding": "Losing about 1.6% of body mass in water worsened vigilance, working memory, tension and fatigue.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Mild%20dehydration%20impairs%20cognitive%20performance%20and%20mood%20of%20men"
+        },
+        {
+          "citation": "Armstrong et al., Journal of Nutrition, 2012",
+          "title": "Mild dehydration affects mood in healthy young women",
+          "finding": "A 1.4% loss lowered mood and concentration and made tasks feel harder.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Mild%20dehydration%20affects%20mood%20in%20healthy%20young%20women"
+        }
+      ],
+      "caution": "80 oz is a rule of thumb. Needs change with body size, heat and exercise. If you have a heart or kidney condition, or take diuretics, ask your doctor about fluid targets.",
+      "note": null,
+      "episodeTimestamps": "00:06:44"
+    },
+    {
+      "number": 2,
+      "slug": "light",
+      "tabLabel": "Light",
+      "name": "Morning light",
+      "summary": "Get outdoor light in your eyes in the first hour.",
+      "todayLine": "Outside, no sunglasses, facing the bright sky.",
+      "steps": [
+        "Go outside within 30–60 minutes of waking. A balcony or an open car window counts. Glass blocks too much, so don't rely on a closed window.",
+        "Face the bright part of the sky without sunglasses. Look toward the low sun, never straight at it.",
+        "Stay about 5–10 minutes on a clear morning and 15–20 or more under cloud. These durations come from his earlier published guidance; he gives no minutes in this episode.",
+        "Up before sunrise? Use a 10,000 lux lamp until daylight arrives.",
+        "Missed a day? Stay out about twice as long the next morning.",
+        "Two or three times a week, also get low-UV sun on your skin."
+      ],
+      "minimum": "Drink your morning water outside.",
+      "tool": null,
+      "why": "Light-sensitive cells in the retina report daylight to the brain's master clock. Bright light in the first hour pushes the morning cortisol peak higher, and a higher morning peak sets up lower cortisol and earlier melatonin at night. Phone and laptop screens are too dim to do this job in the morning, yet bright enough to disturb the clock at night.",
+      "evidenceLevel": "strong",
+      "evidenceSummary": "The strongest of the ten. Light is the main signal that sets the human body clock, and two very large wearable-sensor studies link bright days and dark nights to better mental health and longer life. Those large studies are observational, so they show association and not proof of cause.",
+      "studies": [
+        {
+          "citation": "Leproult et al., Journal of Clinical Endocrinology & Metabolism, 2001",
+          "title": "Transition from dim to bright light in the morning induces an immediate elevation of cortisol levels",
+          "finding": "Moving from dim to bright light in the early morning raised cortisol by more than 50% in sleep-deprived volunteers. The same change in the afternoon did nothing.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Transition%20from%20dim%20to%20bright%20light%20in%20the%20morning%20induces%20an%20immediate%20elevation%20of%20cortisol%20levels"
+        },
+        {
+          "citation": "Windred et al., PNAS, 2024",
+          "title": "Brighter nights and darker days predict higher mortality risk: A prospective analysis of personal light exposure in >88,000 individuals",
+          "finding": "About 89,000 UK Biobank adults wore light sensors for a week. The brightest nights went with 21–34% higher risk of death in the following years, the brightest days with 17–34% lower risk.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Brighter%20nights%20and%20darker%20days%20predict%20higher%20mortality%20risk%3A%20A%20prospective%20analysis%20of%20personal%20light%20exposure%20in%20%3E88%2C000%20individuals"
+        },
+        {
+          "citation": "Burns et al., Nature Mental Health, 2023",
+          "title": "Day and night light exposure are associated with psychiatric disorders: an objective light study in >85,000 people",
+          "finding": "In the same cohort, more light at night went with more depression and anxiety, and more light by day with less.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Day%20and%20night%20light%20exposure%20are%20associated%20with%20psychiatric%20disorders%3A%20an%20objective%20light%20study%20in%20%3E85%2C000%20people"
+        },
+        {
+          "citation": "Lindqvist et al., Journal of Internal Medicine, 2016",
+          "title": "Avoidance of sun exposure as a risk factor for major causes of death: a competing risk analysis of the Melanoma in Southern Sweden cohort",
+          "finding": "Swedish women who avoided the sun lived shorter lives than those who sought it. This is the source of his remark about smokers and sunlight. Observational and open to confounding.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Avoidance%20of%20sun%20exposure%20as%20a%20risk%20factor%20for%20major%20causes%20of%20death%3A%20a%20competing%20risk%20analysis%20of%20the%20Melanoma%20in%20Southern%20Sweden%20cohort"
+        },
+        {
+          "citation": "Powner & Jeffery, Journal of Biophotonics, 2024",
+          "title": "Light stimulation of mitochondria reduces blood glucose levels",
+          "finding": "Fifteen minutes of 670 nm red light on the back cut the two-hour blood sugar rise after a glucose drink by 27.7% and the peak by 7.5%, in 30 healthy adults. The episode describes this as more than 25% off the peak, which overstates the peak figure.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Light%20stimulation%20of%20mitochondria%20reduces%20blood%20glucose%20levels"
+        }
+      ],
+      "caution": "Never stare at the sun, and stop if your eyes hurt. Check the UV index before exposing skin, and follow your dermatologist's advice if you have a history of skin cancer. Some medications and eye conditions make bright light risky.",
+      "note": null,
+      "episodeTimestamps": "00:07:45"
+    },
+    {
+      "number": 3,
+      "slug": "train",
+      "tabLabel": "Train",
+      "name": "Train early",
+      "summary": "Move hard in the first three hours, at the same time each day.",
+      "todayLine": "Strength or cardio. One rest day a week.",
+      "steps": [
+        "Train in the first 3–4 hours after waking when you can, at roughly the same time each day.",
+        "Strength, 3 days a week: about 45 minutes of compound lifts (pull-ups, rows, dips, presses, squats, deadlifts), 2–3 hard sets each, close to failure.",
+        "Cardio, 3 days a week on the alternate days: one long easy session of about an hour, one of about 30 minutes at moderate effort, and one short interval session (an easy minute, then 30 seconds all out and 10 seconds easy, repeated).",
+        "Take a rest day after your hardest leg session.",
+        "Training later is fine. Bring yourself down afterwards with slow exhales and a hot shower."
+      ],
+      "minimum": "Ten brisk minutes at the same time every morning.",
+      "tool": null,
+      "why": "Hard exercise raises cortisol, which is what you want early in the day. Training at a regular hour also teaches the body clock to expect it, so after a few sessions you start to feel ready before you begin. He says the four hours after an intense session are a good window for learning.",
+      "evidenceLevel": "moderate",
+      "evidenceSummary": "The benefit of regular strength and cardio training is as well established as anything in health research. The case for the morning is thinner: exercise does shift the body clock, but trials have not shown that morning training gives better health outcomes than training later.",
+      "studies": [
+        {
+          "citation": "Bull et al., British Journal of Sports Medicine, 2020",
+          "title": "World Health Organization 2020 guidelines on physical activity and sedentary behaviour",
+          "finding": "Adults should get 150–300 minutes of moderate activity a week, plus muscle strengthening on two or more days.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=World%20Health%20Organization%202020%20guidelines%20on%20physical%20activity%20and%20sedentary%20behaviour"
+        },
+        {
+          "citation": "Youngstedt et al., Journal of Physiology, 2019",
+          "title": "Human circadian phase-response curves for exercise",
+          "finding": "Exercise at 7 am or between 1 and 4 pm moved the body clock earlier. Exercise between 7 and 10 pm moved it later.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Human%20circadian%20phase-response%20curves%20for%20exercise"
+        },
+        {
+          "citation": "Šrámek et al., European Journal of Applied Physiology, 2000",
+          "title": "Human physiological responses to immersion into water of different temperatures",
+          "finding": "An hour in 14°C water raised noradrenaline by 530% and dopamine by 250% while cortisol did not rise. This backs his point that cold water is not a cortisol stressor. Cold exposure is an optional extra, not one of the ten.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Human%20physiological%20responses%20to%20immersion%20into%20water%20of%20different%20temperatures"
+        }
+      ],
+      "caution": "Build up gradually, and get medical clearance first if you have a heart condition or have been inactive for a long time. Cold water carries real risk for people with heart disease. Never combine it with hyperventilation.",
+      "note": null,
+      "episodeTimestamps": "00:24:01"
+    },
+    {
+      "number": 4,
+      "slug": "focus",
+      "tabLabel": "Focus",
+      "name": "One hard focus block",
+      "summary": "Ninety minutes on one hard thing, phone in another room.",
+      "todayLine": "90–120 minutes. Phone out of the room.",
+      "steps": [
+        "Block 90–120 minutes for one mentally demanding task: learning, writing, solving.",
+        "Put your phone in a different room. Face down on the desk is not enough.",
+        "Narrow what you can see: one window on screen, a clear desk, a cap or hood if it helps.",
+        "Pick work hard enough that you get it wrong about 15% of the time. The friction is the sign that learning is happening.",
+        "Stop when the block ends and return to the material a day or two later.",
+        "A week later, test yourself from memory instead of re-reading. Asking an AI model to quiz you works well."
+      ],
+      "minimum": "Twenty-five minutes with the phone in another room.",
+      "tool": null,
+      "why": "The adult brain changes when you make real attempts and miss. Those errors, together with alertness, trigger the rewiring. A phone within reach takes up attention even when it stays silent. He ties the habit of pushing through resistance to a brain region called the anterior mid-cingulate cortex, which is more active in people who regularly do hard things.",
+      "evidenceLevel": "moderate",
+      "evidenceSummary": "Self-testing is one of the best-supported findings in learning research. The phone and 15% figures each rest on one well-known paper: the phone effect has shrunk in later replications, and the 15% error rate comes from a mathematical model checked against animal data.",
+      "studies": [
+        {
+          "citation": "Roediger & Karpicke, Psychological Science, 2006",
+          "title": "Test-enhanced learning: taking memory tests improves long-term retention",
+          "finding": "Students who read a passage and then took a recall test remembered more a week later than students who re-read it.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Test-enhanced%20learning%3A%20taking%20memory%20tests%20improves%20long-term%20retention"
+        },
+        {
+          "citation": "Ward et al., Journal of the Association for Consumer Research, 2017",
+          "title": "Brain Drain: The Mere Presence of One's Own Smartphone Reduces Available Cognitive Capacity",
+          "finding": "People did worse on attention and reasoning tasks with their phone on the desk than with it in another room, even switched off.",
+          "searchUrl": "https://scholar.google.com/scholar?q=Brain%20Drain%3A%20The%20Mere%20Presence%20of%20One's%20Own%20Smartphone%20Reduces%20Available%20Cognitive%20Capacity"
+        },
+        {
+          "citation": "Wilson et al., Nature Communications, 2019",
+          "title": "The Eighty Five Percent Rule for optimal learning",
+          "finding": "For a broad class of learning models, training is fastest at an error rate of about 15.87%.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=The%20Eighty%20Five%20Percent%20Rule%20for%20optimal%20learning"
+        },
+        {
+          "citation": "Touroutoglou et al., Cortex, 2020",
+          "title": "The tenacious brain: How the anterior mid-cingulate contributes to achieving goals",
+          "finding": "Reviews the evidence that this region supports persistence when effort is costly.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=The%20tenacious%20brain%3A%20How%20the%20anterior%20mid-cingulate%20contributes%20to%20achieving%20goals"
+        },
+        {
+          "citation": "Parvizi et al., Neuron, 2013",
+          "title": "The will to persevere induced by electrical stimulation of the human cingulate gyrus",
+          "finding": "Stimulating this area in two patients produced the sense of an approaching challenge and the resolve to push through it.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=The%20will%20to%20persevere%20induced%20by%20electrical%20stimulation%20of%20the%20human%20cingulate%20gyrus"
+        }
+      ],
+      "caution": "If your day doesn't allow one long block, two shorter ones still count.",
+      "note": null,
+      "episodeTimestamps": "01:39:22"
+    },
+    {
+      "number": 5,
+      "slug": "sigh",
+      "tabLabel": "Sigh",
+      "name": "The physiological sigh",
+      "summary": "Two inhales through the nose, one long exhale.",
+      "todayLine": "Double inhale, long exhale. Then decide what to say.",
+      "steps": [
+        "Inhale through the nose. Without exhaling, take a second short inhale to fill the lungs completely.",
+        "Exhale slowly through the mouth until your lungs are empty.",
+        "One to three rounds is enough in the moment. Five minutes a day builds the skill.",
+        "In the first 20–30 seconds of a stress spike your judgment is at its worst. Say nothing and send nothing until it passes.",
+        "Awake at 3 am? Do ten long exhales before anything else."
+      ],
+      "minimum": "One sigh before you answer a stressful message.",
+      "tool": "pacer",
+      "why": "The second inhale reopens small air sacs in the lungs that have collapsed, so the exhale that follows clears more carbon dioxide. A long exhale also slows the heart through the vagus nerve. Together they bring arousal down within seconds.",
+      "evidenceLevel": "moderate",
+      "evidenceSummary": "One randomized trial, run in his own lab, with about 110 people over a month. Five minutes a day of this breathing improved mood more than mindfulness meditation and lowered resting breathing rate. The effects were modest and self-reported. The claim that a single sigh works at once comes from his observation, not from that trial.",
+      "studies": [
+        {
+          "citation": "Balban et al., Cell Reports Medicine, 2023",
+          "title": "Brief structured respiration practices enhance mood and reduce physiological arousal",
+          "finding": "Compared three five-minute breathing practices with mindfulness meditation. Exhale-focused cyclic sighing gave the largest daily gain in positive mood.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Brief%20structured%20respiration%20practices%20enhance%20mood%20and%20reduce%20physiological%20arousal"
+        },
+        {
+          "citation": "Li et al., Nature, 2016",
+          "title": "The peptidergic control circuit for sighing",
+          "finding": "Identified the small group of brainstem neurons that turns a normal breath into a sigh, in mice.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=The%20peptidergic%20control%20circuit%20for%20sighing"
+        }
+      ],
+      "caution": "Stop if you feel dizzy. Don't practise forceful breathing in water or while driving.",
+      "note": null,
+      "episodeTimestamps": "00:46:30"
+    },
+    {
+      "number": 6,
+      "slug": "late-light",
+      "tabLabel": "Late light",
+      "name": "Late-day light",
+      "summary": "Get outside again before dark.",
+      "todayLine": "A few minutes outdoors before the light goes.",
+      "steps": [
+        "In the last third of your day, spend 5–10 minutes outside without sunglasses. You don't need to see the sunset itself.",
+        "If you work indoors until dark, move next to a window or walk once around the building.",
+        "Overcast still counts. There is always more light outside than inside."
+      ],
+      "minimum": "Two minutes outside on the way home.",
+      "tool": null,
+      "why": "Light you get during the day makes the eye's clock cells less reactive to artificial light later on. He calls this a Netflix inoculation: afternoon daylight softens the hit that melatonin, blood sugar and sleep take from evening screens. He adds that it doesn't seem to protect teenagers.",
+      "evidenceLevel": "moderate",
+      "evidenceSummary": "Laboratory studies show that people who get more light earlier in the day lose less melatonin to the same evening light. The studies are small and measure melatonin, not long-term health.",
+      "studies": [
+        {
+          "citation": "Hébert et al., Journal of Pineal Research, 2002",
+          "title": "The effects of prior light history on the suppression of melatonin by light in humans",
+          "finding": "After a week of bright days, the same evening light suppressed melatonin less than after a week of dim days.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=The%20effects%20of%20prior%20light%20history%20on%20the%20suppression%20of%20melatonin%20by%20light%20in%20humans"
+        },
+        {
+          "citation": "Chang, Scheer & Czeisler, Journal of Physiology, 2011",
+          "title": "The human circadian system adapts to prior photic history",
+          "finding": "Three days in very dim light made the body clock more sensitive to a later light pulse than three days in ordinary room light.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=The%20human%20circadian%20system%20adapts%20to%20prior%20photic%20history"
+        },
+        {
+          "citation": "Crowley et al., Journal of Clinical Endocrinology & Metabolism, 2015",
+          "title": "Increased Sensitivity of the Circadian System to Light in Early/Mid-Puberty",
+          "finding": "Children in early puberty lost far more melatonin to evening light than older adolescents did.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Increased%20Sensitivity%20of%20the%20Circadian%20System%20to%20Light%20in%20Early%2FMid-Puberty"
+        }
+      ],
+      "caution": "This softens the effect of evening screens. It doesn't cancel bright light late at night.",
+      "note": null,
+      "episodeTimestamps": "00:21:58"
+    },
+    {
+      "number": 7,
+      "slug": "dim",
+      "tabLabel": "Dim",
+      "name": "Dim the evening",
+      "summary": "Lights low after sunset, screens off 30 minutes before bed.",
+      "todayLine": "Low lamps, dimmed screens, then no screens.",
+      "steps": [
+        "After sunset, switch from overhead lights to a few low lamps.",
+        "Dim your screens. On a phone, set up the colour filter shortcut for a red screen.",
+        "No screens in the last 30 minutes before sleep.",
+        "Still wired after a late workout? A hot shower helps your core temperature drop."
+      ],
+      "minimum": "Phone down 30 minutes before bed.",
+      "tool": null,
+      "why": "Evening light delays and shortens the night's melatonin. He adds that it also raises cortisol at the hour when it should be lowest, and that this affects blood sugar and the next morning's cortisol rise.",
+      "evidenceLevel": "strong",
+      "evidenceSummary": "Well supported. Ordinary room light before bed is enough to suppress melatonin, and reading on a light-emitting screen delays sleep and the body clock.",
+      "studies": [
+        {
+          "citation": "Gooley et al., Journal of Clinical Endocrinology & Metabolism, 2011",
+          "title": "Exposure to room light before bedtime suppresses melatonin onset and shortens melatonin duration in humans",
+          "finding": "Room light in the hours before bed delayed melatonin and shortened its duration by about 90 minutes compared with dim light.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Exposure%20to%20room%20light%20before%20bedtime%20suppresses%20melatonin%20onset%20and%20shortens%20melatonin%20duration%20in%20humans"
+        },
+        {
+          "citation": "Chang et al., PNAS, 2015",
+          "title": "Evening use of light-emitting eReaders negatively affects sleep, circadian timing, and next-morning alertness",
+          "finding": "Reading on a light-emitting e-reader before bed delayed the body clock, reduced evening sleepiness and lowered alertness the next morning, compared with a printed book.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Evening%20use%20of%20light-emitting%20eReaders%20negatively%20affects%20sleep%2C%20circadian%20timing%2C%20and%20next-morning%20alertness"
+        }
+      ],
+      "caution": null,
+      "note": null,
+      "episodeTimestamps": "01:37:59"
+    },
+    {
+      "number": 8,
+      "slug": "sleep",
+      "tabLabel": "Sleep",
+      "name": "Sleep dark",
+      "summary": "Make the bedroom dark, and sleep on your side.",
+      "todayLine": "Dark room or eye mask. Ten long exhales if you wake.",
+      "steps": [
+        "Make the room as dark as you can. An eye mask is the cheap fix.",
+        "Earplugs and a cool bed help if noise or heat wake you.",
+        "Sleep on your side with your head slightly raised.",
+        "If you wake in the night: ten long exhales, then the eye sequence below.",
+        "After you get up, move: walk, shake out, skip rope. He says this helps drain fluid that pooled overnight."
+      ],
+      "minimum": "Wear an eye mask.",
+      "tool": "eyes",
+      "why": "Light reaches the body clock even through closed eyelids and keeps the body in a more alert state. For side sleeping, the argument is that the brain's overnight waste-clearing system drains better in that position. The eye sequence is meant to quiet the brain circuits that track where your limbs are, which he says is a step toward falling asleep.",
+      "evidenceLevel": "moderate",
+      "evidenceSummary": "Darkness is well supported: one night of moderate room light measurably worsened heart rate and blood sugar control the next morning. Side sleeping is early: he calls the gain slight, and the key posture study was done in rats. His claim that it clears bags under the eyes has no study behind it that this app could find. The eye-movement trick has, by his own account, only indirect support, and this app found no trial of it.",
+      "studies": [
+        {
+          "citation": "Mason et al., PNAS, 2022",
+          "title": "Light exposure during sleep impairs cardiometabolic function",
+          "finding": "One night of sleep in 100 lux, compared with near darkness, raised night-time heart rate and next-morning insulin resistance in 20 young adults.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Light%20exposure%20during%20sleep%20impairs%20cardiometabolic%20function"
+        },
+        {
+          "citation": "Windred et al., PNAS, 2024",
+          "title": "Brighter nights and darker days predict higher mortality risk: A prospective analysis of personal light exposure in >88,000 individuals",
+          "finding": "The brightest nights went with 21–34% higher risk of death. Observational.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Brighter%20nights%20and%20darker%20days%20predict%20higher%20mortality%20risk%3A%20A%20prospective%20analysis%20of%20personal%20light%20exposure%20in%20%3E88%2C000%20individuals"
+        },
+        {
+          "citation": "Xie et al., Science, 2013",
+          "title": "Sleep drives metabolite clearance from the adult brain",
+          "finding": "In mice, the space between brain cells widens during sleep and waste products clear about twice as fast.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Sleep%20drives%20metabolite%20clearance%20from%20the%20adult%20brain"
+        },
+        {
+          "citation": "Lee et al., Journal of Neuroscience, 2015",
+          "title": "The Effect of Body Posture on Brain Glymphatic Transport",
+          "finding": "Anaesthetised rats cleared tracer from the brain most efficiently lying on their side.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=The%20Effect%20of%20Body%20Posture%20on%20Brain%20Glymphatic%20Transport"
+        }
+      ],
+      "caution": "Persistent insomnia, loud snoring or pauses in breathing deserve a doctor's visit, not a trick.",
+      "note": null,
+      "episodeTimestamps": "01:37:59, 00:55:55 and 01:55:05"
+    },
+    {
+      "number": 9,
+      "slug": "food",
+      "tabLabel": "Food",
+      "name": "Eat for steady energy, walk after meals",
+      "summary": "Protein, plants, some starch, then a short walk.",
+      "todayLine": "Protein and plants at each meal. Walk 5–10 minutes after.",
+      "steps": [
+        "Build each meal around a protein that gives a lot of protein for its calories: eggs, fish, lean meat, or a planned plant combination.",
+        "Add vegetables and fruit for fibre and micronutrients.",
+        "Eat a low-sugar fermented food most days: sauerkraut, kimchi, beet kvass.",
+        "Cook with olive oil and a little butter. He advises skipping the seed oil argument.",
+        "Include some starch (rice, oats, potatoes, sourdough), especially at your last meal, and keep it from being buried in fat.",
+        "Walk for 5–10 minutes after eating. Stuck in a seat? Do seated calf raises, a few squats, or bounce your knee.",
+        "Aim for 7,000–8,000 steps across the day. Take the stairs and pace during calls."
+      ],
+      "minimum": "A five-minute walk after your largest meal.",
+      "tool": null,
+      "why": "Working muscle pulls glucose out of the blood, so light movement after a meal flattens the spike. The soleus, a calf muscle, can keep doing this for hours. Fermented foods support a more varied gut microbiome. His case for starch is that glucose lowers cortisol, which helps sleep when the starch is eaten in the evening.",
+      "evidenceLevel": "moderate",
+      "evidenceSummary": "Post-meal walking is strongly supported. Fermented foods have one good randomized trial behind them. The starch and cortisol reasoning is plausible but lightly tested. He is blunt in the episode that most nutrition research is weak.",
+      "studies": [
+        {
+          "citation": "Buffey et al., Sports Medicine, 2022",
+          "title": "The Acute Effects of Interrupting Prolonged Sitting Time in Adults with Standing and Light-Intensity Walking on Biomarkers of Cardiometabolic Health in Adults: A Systematic Review and Meta-analysis",
+          "finding": "Across seven trials, short light walks lowered post-meal blood sugar compared with sitting, and did more than standing.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=The%20Acute%20Effects%20of%20Interrupting%20Prolonged%20Sitting%20Time%20in%20Adults%20with%20Standing%20and%20Light-Intensity%20Walking%20on%20Biomarkers%20of%20Cardiometabolic%20Health%20in%20Adults%3A%20A%20Systematic%20Review%20and%20Meta-analysis"
+        },
+        {
+          "citation": "Hamilton et al., iScience, 2022",
+          "title": "A potent physiological method to magnify and sustain soleus oxidative metabolism improves glucose and lipid regulation",
+          "finding": "Seated calf raises kept up for hours cut the blood sugar rise after a glucose drink by 52% in 25 adults. He calls the method impractical and uses it to explain why walking works.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=A%20potent%20physiological%20method%20to%20magnify%20and%20sustain%20soleus%20oxidative%20metabolism%20improves%20glucose%20and%20lipid%20regulation"
+        },
+        {
+          "citation": "Gao et al., Scandinavian Journal of Medicine & Science in Sports, 2024",
+          "title": "Enhanced muscle activity during interrupted sitting improves glycemic control in overweight and obese men",
+          "finding": "Three-minute squat or walk breaks every 45 minutes lowered blood sugar more than a single 30-minute walk, in 18 overweight men. The episode describes the breaks as ten squats; each one lasted three minutes.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Enhanced%20muscle%20activity%20during%20interrupted%20sitting%20improves%20glycemic%20control%20in%20overweight%20and%20obese%20men"
+        },
+        {
+          "citation": "Paluch et al., Lancet Public Health, 2022",
+          "title": "Daily steps and all-cause mortality: a meta-analysis of 15 international cohorts",
+          "finding": "Risk of death fell as daily steps rose, levelling off at about 6,000–8,000 steps for adults over 60 and 8,000–10,000 for younger adults.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Daily%20steps%20and%20all-cause%20mortality%3A%20a%20meta-analysis%20of%2015%20international%20cohorts"
+        },
+        {
+          "citation": "Levine et al., Science, 1999",
+          "title": "Role of nonexercise activity thermogenesis in resistance to fat gain in humans",
+          "finding": "When 16 adults were overfed by 1,000 kcal a day, those whose everyday movement rose the most gained the least fat.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Role%20of%20nonexercise%20activity%20thermogenesis%20in%20resistance%20to%20fat%20gain%20in%20humans"
+        },
+        {
+          "citation": "Wastyk et al., Cell, 2021",
+          "title": "Gut-microbiota-targeted diets modulate human immune status",
+          "finding": "Ten weeks of fermented foods increased gut microbiome diversity and lowered 19 inflammatory proteins in 36 adults. A high-fibre diet did not.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Gut-microbiota-targeted%20diets%20modulate%20human%20immune%20status"
+        },
+        {
+          "citation": "Afaghi et al., American Journal of Clinical Nutrition, 2007",
+          "title": "High-glycemic-index carbohydrate meals shorten sleep onset",
+          "finding": "A high-glycaemic rice meal four hours before bed nearly halved the time 12 men took to fall asleep.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=High-glycemic-index%20carbohydrate%20meals%20shorten%20sleep%20onset"
+        },
+        {
+          "citation": "Pontzer et al., Science, 2021",
+          "title": "Daily energy expenditure through the human life course",
+          "finding": "Energy use, adjusted for body size, stays flat from age 20 to 60 and declines only after that, in data from more than 6,400 people. This is the basis for his point that metabolism need not fall with age.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Daily%20energy%20expenditure%20through%20the%20human%20life%20course"
+        }
+      ],
+      "caution": "If you have diabetes, kidney disease or a history of disordered eating, set food targets with your clinician.",
+      "note": "He says nutrition is one of his ten cards but never gives its number, so No. 9 is the slot left over. The walk after meals came up as a closing question from the host.",
+      "episodeTimestamps": "00:38:35 and 02:04:22"
+    },
+    {
+      "number": 10,
+      "slug": "quiet",
+      "tabLabel": "Quiet",
+      "name": "Goal-free time",
+      "summary": "Once a day, time with no goal and no input.",
+      "todayLine": "Sit, pray, draw or walk. No phone, no target.",
+      "steps": [
+        "Once a day, step out of doing and responding: sit quietly, meditate, draw or listen to music. He sets no length. Ten minutes is a workable start.",
+        "Don't try to work anything out. Asking yourself what to do with your life is not how this works. Let wants surface as feelings and images.",
+        "Run the three daily checks he takes from the analyst James Hollis. Shut up: someone has it worse, so practise gratitude, giving it and receiving it. Suit up: prepare and look after yourself. Show up: do your part in the roles you hold.",
+        "If you pray, this is where it fits. He prays every night, asking for clarity and the energy to act well, not for outcomes.",
+        "Longer versions count too: a run, a hike, a camping trip.",
+        "Don't wait to find a calling. He says you find it while working hard at something else, and he plans his own life in five-year chunks."
+      ],
+      "minimum": "Ten breaths of full attention before you get out of bed. That is his own morning minimum.",
+      "tool": null,
+      "why": "The argument he takes from Hollis: people who only fulfil roles and prepare for them can do it for decades and still end up miserable. Time outside stimulus and response lets less conscious wishes surface as feelings or images, which then shape what you notice and choose. He pairs this with the hard focus block: one period a day of full effort, one with none.",
+      "evidenceLevel": "early",
+      "evidenceSummary": "The least evidence-based of the ten, and he presents it as personal experience. Nearby research exists: meditation programmes modestly reduce anxiety and low mood, gratitude exercises raise well-being in trials, and attending religious services is associated with longer life in observational data. He also cites a 2026 brain-imaging study of meditation and concludes that regular meditators can sleep about an hour less. The study did not measure how much sleep anyone needs.",
+      "studies": [
+        {
+          "citation": "Goyal et al., JAMA Internal Medicine, 2014",
+          "title": "Meditation programs for psychological stress and well-being: a systematic review and meta-analysis",
+          "finding": "Across 47 trials, mindfulness meditation programmes gave moderate improvements in anxiety, depression and pain.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Meditation%20programs%20for%20psychological%20stress%20and%20well-being%3A%20a%20systematic%20review%20and%20meta-analysis"
+        },
+        {
+          "citation": "Emmons & McCullough, Journal of Personality and Social Psychology, 2003",
+          "title": "Counting blessings versus burdens: an experimental investigation of gratitude and subjective well-being in daily life",
+          "finding": "People who listed things they were grateful for each week reported higher well-being than those who listed hassles.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Counting%20blessings%20versus%20burdens%3A%20an%20experimental%20investigation%20of%20gratitude%20and%20subjective%20well-being%20in%20daily%20life"
+        },
+        {
+          "citation": "Li et al., JAMA Internal Medicine, 2016",
+          "title": "Association of Religious Service Attendance With Mortality Among Women",
+          "finding": "Among about 74,000 US nurses, attending services more than once a week went with 33% lower mortality over 16 years. Observational.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Association%20of%20Religious%20Service%20Attendance%20With%20Mortality%20Among%20Women"
+        },
+        {
+          "citation": "Keating et al., PNAS, 2026",
+          "title": "Neurofluid circulation changes during a focused attention style of mindfulness meditation",
+          "finding": "MRI of 23 experienced meditators showed brain fluid flow shifting toward a sleep-like pattern during focused-attention meditation. It did not measure waste clearance directly, and beginners were not tested.",
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Neurofluid%20circulation%20changes%20during%20a%20focused%20attention%20style%20of%20mindfulness%20meditation"
+        }
+      ],
+      "caution": null,
+      "note": null,
+      "episodeTimestamps": "01:48:34 and 01:18:25"
+    }
+  ],
+  "supplements": [
+    {
+      "name": "Magnesium threonate or bisglycinate",
+      "doseStated": "None given in the episode",
+      "statedUse": "Only if you sleep poorly. He says good sleepers need nothing for sleep, and that the two forms are interchangeable.",
+      "evidenceSummary": "Weak. A review of trials in older adults with insomnia found a small benefit from low-quality evidence.",
+      "caution": "The upper limit for supplemental magnesium is 350 mg a day. More can cause diarrhoea, and it builds up in people with kidney disease.",
+      "studies": [
+        {
+          "citation": "Mah & Pitre, BMC Complementary Medicine and Therapies, 2021",
+          "title": "Oral magnesium supplementation for insomnia in older adults: a Systematic Review & Meta-Analysis",
+          "finding": null,
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Oral%20magnesium%20supplementation%20for%20insomnia%20in%20older%20adults%3A%20a%20Systematic%20Review%20%26%20Meta-Analysis"
+        },
+        {
+          "citation": "NIH Office of Dietary Supplements",
+          "title": "Magnesium: Fact Sheet for Health Professionals",
+          "finding": null,
+          "searchUrl": "https://ods.od.nih.gov/factsheets/Magnesium-HealthProfessional/"
+        }
+      ]
+    },
+    {
+      "name": "EPA omega-3",
+      "doseStated": "At least 1 g of EPA a day, in prescription form",
+      "statedUse": "Brain health, and probably heart health and lower inflammation. He doesn't eat oily fish, and prefers a prescription product for its purity and price.",
+      "evidenceSummary": "Mixed. A prescription EPA product at 4 g a day cut cardiovascular events in high-risk patients on statins. A large trial of 1 g of fish oil in the general population found no drop in major cardiovascular events or cancer.",
+      "caution": "He names Lovaza. Lovaza contains both EPA and DHA; the EPA-only prescription product is icosapent ethyl (Vascepa), the one used in the first trial below. Whether a prescription suits you is your doctor's call. Higher doses are linked with more atrial fibrillation and can increase bleeding with blood thinners.",
+      "studies": [
+        {
+          "citation": "Bhatt et al., NEJM, 2019",
+          "title": "Cardiovascular Risk Reduction with Icosapent Ethyl for Hypertriglyceridemia",
+          "finding": null,
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Cardiovascular%20Risk%20Reduction%20with%20Icosapent%20Ethyl%20for%20Hypertriglyceridemia"
+        },
+        {
+          "citation": "Manson et al., NEJM, 2019",
+          "title": "Marine n-3 Fatty Acids and Prevention of Cardiovascular Disease and Cancer",
+          "finding": null,
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Marine%20n-3%20Fatty%20Acids%20and%20Prevention%20of%20Cardiovascular%20Disease%20and%20Cancer"
+        }
+      ]
+    },
+    {
+      "name": "Vitamin D",
+      "doseStated": "5,000–10,000 IU a day",
+      "statedUse": "Hormone health and general health. He says his own blood work looks better at 5,000 IU than at 3,000, and concedes that 10,000 may be a little high.",
+      "evidenceSummary": "Correcting a real deficiency matters. In people who are not deficient, a large trial of 2,000 IU a day found no reduction in cancer or cardiovascular events.",
+      "caution": "This dose is above the 4,000 IU daily upper limit set by US and European authorities, and he waves off the usual advice to test first. Get a blood test and agree a dose with your doctor before going above 4,000 IU. Too much raises blood calcium.",
+      "studies": [
+        {
+          "citation": "Manson et al., NEJM, 2019",
+          "title": "Vitamin D Supplements and Prevention of Cancer and Cardiovascular Disease",
+          "finding": null,
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Vitamin%20D%20Supplements%20and%20Prevention%20of%20Cancer%20and%20Cardiovascular%20Disease"
+        },
+        {
+          "citation": "NIH Office of Dietary Supplements",
+          "title": "Vitamin D: Fact Sheet for Health Professionals",
+          "finding": null,
+          "searchUrl": "https://ods.od.nih.gov/factsheets/VitaminD-HealthProfessional/"
+        }
+      ]
+    },
+    {
+      "name": "Alpha-GPC",
+      "doseStated": "600 or 900 mg, with 600 mg of odourless garlic",
+      "statedUse": "A stimulant to pair with caffeine before hard training or work, especially late in the day. He says it sharpens focus without harming sleep and adds REM sleep. The garlic is meant to offset a rise in TMAO, a compound linked with heart disease.",
+      "evidenceSummary": "Thin for healthy adults. The safety signal is larger than the benefit data.",
+      "caution": "A Korean study of 12 million adults over 50 found 46% more strokes over ten years among people prescribed alpha-GPC. Observational, but large. Whether garlic offsets the risk has not been tested in a trial this app could find.",
+      "studies": [
+        {
+          "citation": "Lee et al., JAMA Network Open, 2021",
+          "title": "Association of L-α Glycerylphosphorylcholine With Subsequent Stroke Risk After 10 Years",
+          "finding": null,
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Association%20of%20L-%CE%B1%20Glycerylphosphorylcholine%20With%20Subsequent%20Stroke%20Risk%20After%2010%20Years"
+        }
+      ]
+    },
+    {
+      "name": "Caffeine",
+      "doseStated": "200–400 mg a day",
+      "statedUse": "Alertness. He cites a link with lower dementia risk and says himself that it is a correlation, not proof.",
+      "evidenceSummary": "The dementia link is observational: moderate coffee and tea drinkers in UK Biobank had fewer strokes and less dementia. It does not show that caffeine is the cause.",
+      "caution": "Up to 400 mg a day is considered safe for most adults, and 200 mg in pregnancy. Keep it early: a dose six hours before bed still cut sleep by about an hour.",
+      "studies": [
+        {
+          "citation": "Zhang et al., PLoS Medicine, 2021",
+          "title": "Consumption of coffee and tea and risk of developing stroke, dementia, and poststroke dementia: A cohort study in the UK Biobank",
+          "finding": null,
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Consumption%20of%20coffee%20and%20tea%20and%20risk%20of%20developing%20stroke%2C%20dementia%2C%20and%20poststroke%20dementia%3A%20A%20cohort%20study%20in%20the%20UK%20Biobank"
+        },
+        {
+          "citation": "Drake et al., Journal of Clinical Sleep Medicine, 2013",
+          "title": "Caffeine effects on sleep taken 0, 3, or 6 hours before going to bed",
+          "finding": null,
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Caffeine%20effects%20on%20sleep%20taken%200%2C%203%2C%20or%206%20hours%20before%20going%20to%20bed"
+        }
+      ]
+    },
+    {
+      "name": "Creatine monohydrate",
+      "doseStated": "5–10 g a day",
+      "statedUse": "His last, optional pick. He has taken it since his teens for strength, and says the thinking benefit shows mostly under sleep loss or stress.",
+      "evidenceSummary": "The best-studied supplement here for muscle. For cognition the evidence is early: small trials suggest a benefit for memory and for performance when sleep-deprived.",
+      "caution": "Generally well tolerated at 3–5 g. Ask your doctor first if you have kidney disease.",
+      "studies": [
+        {
+          "citation": "Gordji-Nejad et al., Scientific Reports, 2024",
+          "title": "Single dose creatine improves cognitive performance and induces changes in cerebral high energy phosphates during sleep deprivation",
+          "finding": null,
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Single%20dose%20creatine%20improves%20cognitive%20performance%20and%20induces%20changes%20in%20cerebral%20high%20energy%20phosphates%20during%20sleep%20deprivation"
+        },
+        {
+          "citation": "Avgerinos et al., Experimental Gerontology, 2018",
+          "title": "Effects of creatine supplementation on cognitive function of healthy individuals: A systematic review of randomized controlled trials",
+          "finding": null,
+          "searchUrl": "https://pubmed.ncbi.nlm.nih.gov/?term=Effects%20of%20creatine%20supplementation%20on%20cognitive%20function%20of%20healthy%20individuals%3A%20A%20systematic%20review%20of%20randomized%20controlled%20trials"
+        }
+      ]
+    }
+  ],
+  "supplementsAlsoNamed": [
+    "L-tyrosine",
+    "theanine with low-dose caffeine",
+    "tart cherry",
+    "apigenin",
+    "daridorexant (prescription)"
+  ],
+  "excludedOnPurpose": [
+    "peptides",
+    "GLP-1 microdosing",
+    "psychedelics"
+  ]
+}

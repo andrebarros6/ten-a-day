@@ -1,0 +1,887 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<title>Ten a Day</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one narrow app column under a sticky tab strip. Today is a time-ordered
+   list hung on a rail that carries the day's light from dawn to night. */
+:root {
+  --bg: #F1F4F7;
+  --surface: #FFFFFF;
+  --ink: #15212C;
+  --muted: #52616E;
+  --line: #D3DBE2;
+  --accent: #B8460E;
+  --accent-soft: #FBE7DA;
+  --done: #1B7A66;
+  --mel: #3F47B5;
+  --sleep: #E2E6F3;
+  --dawn: #F0A24F;
+  --noon: #86C3E8;
+  --dusk: #D4728A;
+  --night: #2A2E6E;
+  --display: "Bricolage Grotesque", "Avenir Next Condensed", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0D151E; --surface: #15202B; --ink: #E7EDF2; --muted: #9BAAB7; --line: #2A3947;
+    --accent: #FF9B52; --accent-soft: #3A2415; --done: #53C7A9; --mel: #A3ABFF; --sleep: #1A2140;
+    --dawn: #F0A24F; --noon: #86C3E8; --dusk: #D4728A; --night: #4A50B0;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0D151E; --surface: #15202B; --ink: #E7EDF2; --muted: #9BAAB7; --line: #2A3947;
+  --accent: #FF9B52; --accent-soft: #3A2415; --done: #53C7A9; --mel: #A3ABFF; --sleep: #1A2140;
+  --dawn: #F0A24F; --noon: #86C3E8; --dusk: #D4728A; --night: #4A50B0;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--body); font-size: 16px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 780px; margin: 0 auto; padding-inline: 18px; padding-block: 20px 56px; }
+button, input { font: inherit; color: inherit; }
+a { color: var(--accent); text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.12; }
+p { margin: 0; }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.label {
+  font-family: var(--mono); font-size: 12px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted);
+}
+
+/* masthead */
+.mast { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.mast h1 { font-size: clamp(34px, 9vw, 52px); font-weight: 700; letter-spacing: -.02em; }
+.mast .sub { max-width: 46ch; color: var(--muted); font-size: 15px; margin-top: 6px; }
+.streak { text-align: right; }
+.streak b { display: block; font-family: var(--display); font-size: 34px; line-height: 1; font-weight: 700; }
+
+/* tab strip */
+.tabs {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--bg); margin-top: 18px; border-bottom: 1px solid var(--line);
+}
+.tabs .scroll { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; padding-block: 6px 0; }
+.tabs .scroll::-webkit-scrollbar { display: none; }
+.tab {
+  flex: none; background: none; border: 0; border-bottom: 3px solid transparent; cursor: pointer;
+  padding: 9px 11px 8px; font-size: 14.5px; font-weight: 500; color: var(--muted); white-space: nowrap;
+}
+.tab .n { font-family: var(--mono); font-size: 12px; margin-right: 5px; }
+.tab:hover { color: var(--ink); }
+.tab[aria-current="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+.tab.is-done .n { color: var(--done); }
+
+.panel { display: grid; gap: 26px; padding-top: 24px; }
+.panel > * { min-width: 0; }
+
+/* today: settings + rhythm */
+.times { display: flex; gap: 14px 22px; flex-wrap: wrap; align-items: flex-end; }
+.times label { display: grid; gap: 4px; }
+.times input[type="time"] {
+  font-family: var(--mono); font-size: 16px; padding: 7px 9px; background: var(--surface);
+  border: 1px solid var(--line); border-radius: 5px;
+}
+.times .hint { flex: 1 1 220px; font-size: 14px; color: var(--muted); }
+.rhythm svg { display: block; width: 100%; height: auto; }
+.rhythm figcaption { font-size: 13px; color: var(--muted); margin-top: 6px; }
+figure { margin: 0; }
+
+/* today: the list on the light rail */
+.day { list-style: none; margin: 0; padding: 0 0 0 20px; position: relative; }
+.day::before {
+  content: ""; position: absolute; left: 0; top: 6px; bottom: 6px; width: 6px; border-radius: 3px;
+  background: linear-gradient(to bottom, var(--dawn) 0%, var(--noon) 38%, var(--noon) 55%, var(--dusk) 78%, var(--night) 100%);
+}
+.day li {
+  display: grid; grid-template-columns: 30px minmax(0, 1fr); column-gap: 10px; align-items: start;
+  padding-block: 13px; border-bottom: 1px solid var(--line);
+}
+.day li:last-child { border-bottom: 0; }
+.day input[type="checkbox"] { width: 24px; height: 24px; margin: 3px 0 0; accent-color: var(--done); cursor: pointer; }
+.row-top { display: flex; gap: 8px 12px; flex-wrap: wrap; align-items: baseline; font-size: 13px; color: var(--muted); }
+.row-top .when { font-family: var(--mono); color: var(--ink); font-variant-numeric: tabular-nums; }
+.chip-now {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+  background: var(--accent-soft); color: var(--accent); padding: 1px 7px; border-radius: 3px;
+}
+.day label { display: block; font-family: var(--display); font-size: 20px; font-weight: 700; margin-top: 1px; cursor: pointer; }
+.day li.is-done label { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 1px; }
+.day .act { font-size: 15px; color: var(--muted); }
+.linkbtn { background: none; border: 0; padding: 0; color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; font-size: 14px; }
+
+/* today: score */
+.score { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 22px 28px; align-items: end; }
+.score .big { font-family: var(--display); font-size: 46px; font-weight: 700; line-height: 1; }
+.week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; align-items: end; height: 92px; }
+.week .col { display: grid; grid-template-rows: 1fr auto auto; gap: 3px; height: 100%; text-align: center; font-size: 11px; color: var(--muted); }
+.week .bar-wrap { display: flex; align-items: flex-end; border-bottom: 1px solid var(--line); }
+.week .bar { width: 100%; background: var(--line); border-radius: 2px 2px 0 0; min-height: 2px; }
+.week .col.kept .bar { background: var(--done); }
+.week .col.today { color: var(--ink); font-weight: 600; }
+.btn {
+  background: var(--ink); color: var(--bg); border: 0; border-radius: 5px; padding: 10px 16px;
+  font-weight: 600; cursor: pointer;
+}
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.share { display: grid; gap: 10px; }
+.share pre {
+  margin: 0; font-family: var(--mono); font-size: 13.5px; line-height: 1.5; white-space: pre-wrap;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 5px; padding: 12px 14px;
+}
+.share .rowbtns { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.note { font-size: 13.5px; color: var(--muted); }
+
+/* protocol panels */
+.phead { display: grid; gap: 10px; }
+.phead .num { font-family: var(--mono); font-size: 13px; letter-spacing: .09em; color: var(--muted); text-transform: uppercase; }
+.phead h2 { font-size: clamp(28px, 7vw, 40px); font-weight: 700; letter-spacing: -.015em; }
+.phead .lede { font-size: 18px; max-width: 52ch; }
+.meta { display: flex; gap: 8px 18px; flex-wrap: wrap; align-items: center; font-size: 14px; }
+.meta .when { font-family: var(--mono); }
+.ev { display: inline-flex; align-items: center; gap: 7px; font-size: 13.5px; }
+.pips { display: inline-flex; gap: 3px; }
+.pips i { width: 9px; height: 9px; border: 1.5px solid var(--ink); border-radius: 1px; display: block; }
+.pips i.on { background: var(--ink); }
+.sec { display: grid; gap: 10px; max-width: 66ch; }
+.sec h3 { font-size: 13px; font-family: var(--mono); font-weight: 500; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); }
+.sec ul, .sec ol { margin: 0; padding-left: 20px; display: grid; gap: 7px; }
+.minimum { border-left: 3px solid var(--done); padding: 2px 0 2px 14px; }
+.minimum b { font-weight: 600; }
+.tool { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 18px; display: grid; gap: 14px; max-width: 66ch; }
+.studies { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.studies li { display: grid; gap: 2px; }
+.studies .cite { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+.studies a { font-weight: 500; overflow-wrap: anywhere; }
+.studies .find { font-size: 15px; }
+.caution { font-size: 15px; color: var(--muted); }
+.flag { font-size: 13.5px; background: var(--accent-soft); color: var(--ink); border-radius: 4px; padding: 8px 12px; max-width: 66ch; }
+.pfoot { display: flex; gap: 12px 18px; flex-wrap: wrap; align-items: center; border-top: 1px solid var(--line); padding-top: 16px; }
+
+/* sigh pacer */
+.pacer { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 18px; align-items: center; }
+.lung { width: 112px; height: 112px; display: grid; place-items: center; }
+.lung span {
+  width: 104px; height: 104px; border-radius: 50%; background: var(--noon); opacity: .9;
+  transform: scale(.35); transition: transform 1s linear;
+}
+.pacer .phase { font-family: var(--display); font-size: 21px; font-weight: 700; min-height: 2.3em; }
+@media (prefers-reduced-motion: reduce) { .lung span { transition: none !important; } }
+
+/* supplements */
+.supp { display: grid; gap: 0; }
+.supp article { display: grid; gap: 8px; padding-block: 18px; border-bottom: 1px solid var(--line); max-width: 66ch; }
+.supp article:first-child { padding-top: 0; }
+.supp h3 { font-size: 22px; font-weight: 700; }
+.supp .dose { font-family: var(--mono); font-size: 14px; }
+.supp dl { margin: 0; display: grid; gap: 6px; }
+.supp dt { font-family: var(--mono); font-size: 12px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); }
+.supp dd { margin: 0 0 4px; font-size: 15.5px; }
+.about { max-width: 66ch; }
+.about ul { margin: 0; padding-left: 20px; display: grid; gap: 7px; }
+.toast {
+  position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
+  background: var(--ink); color: var(--bg); padding: 9px 16px; border-radius: 5px; font-size: 14px; z-index: 9;
+}
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <div>
+      <h1>Ten a Day</h1>
+      <p class="sub">A daily checklist for the ten protocols Andrew Huberman set out on The Diary Of A CEO, with the research behind each one. Unofficial.</p>
+    </div>
+    <div class="streak" aria-live="polite">
+      <span class="label">Streak</span>
+      <b id="streakNum">0</b>
+      <span class="muted" style="font-size:13px" id="streakUnit">days</span>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Sections"><div class="scroll" id="tabs"></div></nav>
+
+  <main id="panels">
+    <section class="panel" id="panel-today">
+      <div class="times">
+        <label for="wake"><span class="label">I wake at</span><input type="time" id="wake" value="07:00"></label>
+        <label for="bed"><span class="label">I go to bed at</span><input type="time" id="bed" value="23:00"></label>
+        <p class="hint">Every time below is worked out from these two. Nine of the ten are daily; training has one rest day a week.</p>
+      </div>
+
+      <figure class="rhythm">
+        <div id="rhythm"></div>
+        <figcaption>The idea the ten hang on: push cortisol high early so it is low at night, when melatonin takes over. Schematic shape, not a measurement of you.</figcaption>
+      </figure>
+
+      <ol class="day" id="dayList"></ol>
+
+      <div class="score">
+        <div>
+          <span class="label">Today</span>
+          <div class="big"><span id="scoreNum">0</span><span class="muted" style="font-size:24px"> / 10</span></div>
+          <p class="note" id="scoreNote">A day counts toward your streak at 7 of 10.</p>
+        </div>
+        <div>
+          <span class="label">Last 7 days</span>
+          <div class="week" id="week" role="img" aria-label="Protocols completed on each of the last seven days"></div>
+        </div>
+      </div>
+
+      <div class="share">
+        <span class="label">Share today</span>
+        <pre id="shareText"></pre>
+        <div class="rowbtns">
+          <button class="btn" id="copyBtn" type="button">Copy result</button>
+          <span class="note">Paste it to a friend and ask for theirs. Doing this with one other person is the easiest way to keep going.</span>
+        </div>
+      </div>
+
+      <p class="note" id="syncNote">Your ticks are saved on this device.</p>
+    </section>
+  </main>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- content ---------- */
+  var P = [
+    { n: 1, tab: "Water", name: "Water on waking", short: "Drink 500 ml to 1 L of water soon after you get up.",
+      act: "500 ml to 1 L of water, before coffee.",
+      doit: [
+        "Drink 500 ml to 1 L (16–32 oz) of plain water within half an hour of waking. Electrolytes are optional.",
+        "Use the bathroom first, then drink. He links the pair to the body's wake-up signal.",
+        "Aim for roughly 2.4 L (80 oz) across the day, most of it before late afternoon.",
+        "Drink less in the evening so a full bladder doesn't wake you."
+      ],
+      min: "One large glass before your first coffee.",
+      why: "Even mild dehydration dulls attention and mood. In the episode he adds a second claim: that drinking after waking helps the morning cortisol rise, through signals that travel from the gut and bladder up the vagus nerve to the brain.",
+      ev: 2, evText: "Good support for the idea that mild dehydration hurts mood and concentration. The claim that morning water raises cortisol has no direct human trial behind it that this app could find, so treat it as his hypothesis.",
+      studies: [
+        { c: "Ganio et al., British Journal of Nutrition, 2011", t: "Mild dehydration impairs cognitive performance and mood of men", f: "Losing about 1.6% of body mass in water worsened vigilance, working memory, tension and fatigue." },
+        { c: "Armstrong et al., Journal of Nutrition, 2012", t: "Mild dehydration affects mood in healthy young women", f: "A 1.4% loss lowered mood and concentration and made tasks feel harder." }
+      ],
+      caution: "80 oz is a rule of thumb. Needs change with body size, heat and exercise. If you have a heart or kidney condition, or take diuretics, ask your doctor about fluid targets.",
+      ts: "00:06:44" },
+
+    { n: 2, tab: "Light", name: "Morning light", short: "Get outdoor light in your eyes in the first hour.",
+      act: "Outside, no sunglasses, facing the bright sky.",
+      doit: [
+        "Go outside within 30–60 minutes of waking. A balcony or an open car window counts. Glass blocks too much, so don't rely on a closed window.",
+        "Face the bright part of the sky without sunglasses. Look toward the low sun, never straight at it.",
+        "Stay about 5–10 minutes on a clear morning and 15–20 or more under cloud. These durations come from his earlier published guidance; he gives no minutes in this episode.",
+        "Up before sunrise? Use a 10,000 lux lamp until daylight arrives.",
+        "Missed a day? Stay out about twice as long the next morning.",
+        "Two or three times a week, also get low-UV sun on your skin."
+      ],
+      min: "Drink your morning water outside.",
+      why: "Light-sensitive cells in the retina report daylight to the brain's master clock. Bright light in the first hour pushes the morning cortisol peak higher, and a higher morning peak sets up lower cortisol and earlier melatonin at night. Phone and laptop screens are too dim to do this job in the morning, yet bright enough to disturb the clock at night.",
+      ev: 3, evText: "The strongest of the ten. Light is the main signal that sets the human body clock, and two very large wearable-sensor studies link bright days and dark nights to better mental health and longer life. Those large studies are observational, so they show association and not proof of cause.",
+      studies: [
+        { c: "Leproult et al., Journal of Clinical Endocrinology & Metabolism, 2001", t: "Transition from dim to bright light in the morning induces an immediate elevation of cortisol levels", f: "Moving from dim to bright light in the early morning raised cortisol by more than 50% in sleep-deprived volunteers. The same change in the afternoon did nothing." },
+        { c: "Windred et al., PNAS, 2024", t: "Brighter nights and darker days predict higher mortality risk: A prospective analysis of personal light exposure in >88,000 individuals", f: "About 89,000 UK Biobank adults wore light sensors for a week. The brightest nights went with 21–34% higher risk of death in the following years, the brightest days with 17–34% lower risk." },
+        { c: "Burns et al., Nature Mental Health, 2023", t: "Day and night light exposure are associated with psychiatric disorders: an objective light study in >85,000 people", f: "In the same cohort, more light at night went with more depression and anxiety, and more light by day with less." },
+        { c: "Lindqvist et al., Journal of Internal Medicine, 2016", t: "Avoidance of sun exposure as a risk factor for major causes of death: a competing risk analysis of the Melanoma in Southern Sweden cohort", f: "Swedish women who avoided the sun lived shorter lives than those who sought it. This is the source of his remark about smokers and sunlight. Observational and open to confounding." },
+        { c: "Powner & Jeffery, Journal of Biophotonics, 2024", t: "Light stimulation of mitochondria reduces blood glucose levels", f: "Fifteen minutes of 670 nm red light on the back cut the two-hour blood sugar rise after a glucose drink by 27.7% and the peak by 7.5%, in 30 healthy adults. The episode describes this as more than 25% off the peak, which overstates the peak figure." }
+      ],
+      caution: "Never stare at the sun, and stop if your eyes hurt. Check the UV index before exposing skin, and follow your dermatologist's advice if you have a history of skin cancer. Some medications and eye conditions make bright light risky.",
+      ts: "00:07:45" },
+
+    { n: 3, tab: "Train", name: "Train early", short: "Move hard in the first three hours, at the same time each day.",
+      act: "Strength or cardio. One rest day a week.",
+      doit: [
+        "Train in the first 3–4 hours after waking when you can, at roughly the same time each day.",
+        "Strength, 3 days a week: about 45 minutes of compound lifts (pull-ups, rows, dips, presses, squats, deadlifts), 2–3 hard sets each, close to failure.",
+        "Cardio, 3 days a week on the alternate days: one long easy session of about an hour, one of about 30 minutes at moderate effort, and one short interval session (an easy minute, then 30 seconds all out and 10 seconds easy, repeated).",
+        "Take a rest day after your hardest leg session.",
+        "Training later is fine. Bring yourself down afterwards with slow exhales and a hot shower."
+      ],
+      min: "Ten brisk minutes at the same time every morning.",
+      why: "Hard exercise raises cortisol, which is what you want early in the day. Training at a regular hour also teaches the body clock to expect it, so after a few sessions you start to feel ready before you begin. He says the four hours after an intense session are a good window for learning.",
+      ev: 2, evText: "The benefit of regular strength and cardio training is as well established as anything in health research. The case for the morning is thinner: exercise does shift the body clock, but trials have not shown that morning training gives better health outcomes than training later.",
+      studies: [
+        { c: "Bull et al., British Journal of Sports Medicine, 2020", t: "World Health Organization 2020 guidelines on physical activity and sedentary behaviour", f: "Adults should get 150–300 minutes of moderate activity a week, plus muscle strengthening on two or more days." },
+        { c: "Youngstedt et al., Journal of Physiology, 2019", t: "Human circadian phase-response curves for exercise", f: "Exercise at 7 am or between 1 and 4 pm moved the body clock earlier. Exercise between 7 and 10 pm moved it later." },
+        { c: "Šrámek et al., European Journal of Applied Physiology, 2000", t: "Human physiological responses to immersion into water of different temperatures", f: "An hour in 14°C water raised noradrenaline by 530% and dopamine by 250% while cortisol did not rise. This backs his point that cold water is not a cortisol stressor. Cold exposure is an optional extra, not one of the ten." }
+      ],
+      caution: "Build up gradually, and get medical clearance first if you have a heart condition or have been inactive for a long time. Cold water carries real risk for people with heart disease. Never combine it with hyperventilation.",
+      ts: "00:24:01" },
+
+    { n: 4, tab: "Focus", name: "One hard focus block", short: "Ninety minutes on one hard thing, phone in another room.",
+      act: "90–120 minutes. Phone out of the room.",
+      doit: [
+        "Block 90–120 minutes for one mentally demanding task: learning, writing, solving.",
+        "Put your phone in a different room. Face down on the desk is not enough.",
+        "Narrow what you can see: one window on screen, a clear desk, a cap or hood if it helps.",
+        "Pick work hard enough that you get it wrong about 15% of the time. The friction is the sign that learning is happening.",
+        "Stop when the block ends and return to the material a day or two later.",
+        "A week later, test yourself from memory instead of re-reading. Asking an AI model to quiz you works well."
+      ],
+      min: "Twenty-five minutes with the phone in another room.",
+      why: "The adult brain changes when you make real attempts and miss. Those errors, together with alertness, trigger the rewiring. A phone within reach takes up attention even when it stays silent. He ties the habit of pushing through resistance to a brain region called the anterior mid-cingulate cortex, which is more active in people who regularly do hard things.",
+      ev: 2, evText: "Self-testing is one of the best-supported findings in learning research. The phone and 15% figures each rest on one well-known paper: the phone effect has shrunk in later replications, and the 15% error rate comes from a mathematical model checked against animal data.",
+      studies: [
+        { c: "Roediger & Karpicke, Psychological Science, 2006", t: "Test-enhanced learning: taking memory tests improves long-term retention", f: "Students who read a passage and then took a recall test remembered more a week later than students who re-read it." },
+        { c: "Ward et al., Journal of the Association for Consumer Research, 2017", t: "Brain Drain: The Mere Presence of One's Own Smartphone Reduces Available Cognitive Capacity", f: "People did worse on attention and reasoning tasks with their phone on the desk than with it in another room, even switched off.", scholar: true },
+        { c: "Wilson et al., Nature Communications, 2019", t: "The Eighty Five Percent Rule for optimal learning", f: "For a broad class of learning models, training is fastest at an error rate of about 15.87%." },
+        { c: "Touroutoglou et al., Cortex, 2020", t: "The tenacious brain: How the anterior mid-cingulate contributes to achieving goals", f: "Reviews the evidence that this region supports persistence when effort is costly." },
+        { c: "Parvizi et al., Neuron, 2013", t: "The will to persevere induced by electrical stimulation of the human cingulate gyrus", f: "Stimulating this area in two patients produced the sense of an approaching challenge and the resolve to push through it." }
+      ],
+      caution: "If your day doesn't allow one long block, two shorter ones still count.",
+      ts: "01:39:22" },
+
+    { n: 5, tab: "Sigh", name: "The physiological sigh", short: "Two inhales through the nose, one long exhale.",
+      act: "Double inhale, long exhale. Then decide what to say.",
+      doit: [
+        "Inhale through the nose. Without exhaling, take a second short inhale to fill the lungs completely.",
+        "Exhale slowly through the mouth until your lungs are empty.",
+        "One to three rounds is enough in the moment. Five minutes a day builds the skill.",
+        "In the first 20–30 seconds of a stress spike your judgment is at its worst. Say nothing and send nothing until it passes.",
+        "Awake at 3 am? Do ten long exhales before anything else."
+      ],
+      min: "One sigh before you answer a stressful message.",
+      tool: "pacer",
+      why: "The second inhale reopens small air sacs in the lungs that have collapsed, so the exhale that follows clears more carbon dioxide. A long exhale also slows the heart through the vagus nerve. Together they bring arousal down within seconds.",
+      ev: 2, evText: "One randomized trial, run in his own lab, with about 110 people over a month. Five minutes a day of this breathing improved mood more than mindfulness meditation and lowered resting breathing rate. The effects were modest and self-reported. The claim that a single sigh works at once comes from his observation, not from that trial.",
+      studies: [
+        { c: "Balban et al., Cell Reports Medicine, 2023", t: "Brief structured respiration practices enhance mood and reduce physiological arousal", f: "Compared three five-minute breathing practices with mindfulness meditation. Exhale-focused cyclic sighing gave the largest daily gain in positive mood." },
+        { c: "Li et al., Nature, 2016", t: "The peptidergic control circuit for sighing", f: "Identified the small group of brainstem neurons that turns a normal breath into a sigh, in mice." }
+      ],
+      caution: "Stop if you feel dizzy. Don't practise forceful breathing in water or while driving.",
+      ts: "00:46:30" },
+
+    { n: 6, tab: "Late light", name: "Late-day light", short: "Get outside again before dark.",
+      act: "A few minutes outdoors before the light goes.",
+      doit: [
+        "In the last third of your day, spend 5–10 minutes outside without sunglasses. You don't need to see the sunset itself.",
+        "If you work indoors until dark, move next to a window or walk once around the building.",
+        "Overcast still counts. There is always more light outside than inside."
+      ],
+      min: "Two minutes outside on the way home.",
+      why: "Light you get during the day makes the eye's clock cells less reactive to artificial light later on. He calls this a Netflix inoculation: afternoon daylight softens the hit that melatonin, blood sugar and sleep take from evening screens. He adds that it doesn't seem to protect teenagers.",
+      ev: 2, evText: "Laboratory studies show that people who get more light earlier in the day lose less melatonin to the same evening light. The studies are small and measure melatonin, not long-term health.",
+      studies: [
+        { c: "Hébert et al., Journal of Pineal Research, 2002", t: "The effects of prior light history on the suppression of melatonin by light in humans", f: "After a week of bright days, the same evening light suppressed melatonin less than after a week of dim days." },
+        { c: "Chang, Scheer & Czeisler, Journal of Physiology, 2011", t: "The human circadian system adapts to prior photic history", f: "Three days in very dim light made the body clock more sensitive to a later light pulse than three days in ordinary room light." },
+        { c: "Crowley et al., Journal of Clinical Endocrinology & Metabolism, 2015", t: "Increased Sensitivity of the Circadian System to Light in Early/Mid-Puberty", f: "Children in early puberty lost far more melatonin to evening light than older adolescents did." }
+      ],
+      caution: "This softens the effect of evening screens. It doesn't cancel bright light late at night.",
+      ts: "00:21:58" },
+
+    { n: 7, tab: "Dim", name: "Dim the evening", short: "Lights low after sunset, screens off 30 minutes before bed.",
+      act: "Low lamps, dimmed screens, then no screens.",
+      doit: [
+        "After sunset, switch from overhead lights to a few low lamps.",
+        "Dim your screens. On a phone, set up the colour filter shortcut for a red screen.",
+        "No screens in the last 30 minutes before sleep.",
+        "Still wired after a late workout? A hot shower helps your core temperature drop."
+      ],
+      min: "Phone down 30 minutes before bed.",
+      why: "Evening light delays and shortens the night's melatonin. He adds that it also raises cortisol at the hour when it should be lowest, and that this affects blood sugar and the next morning's cortisol rise.",
+      ev: 3, evText: "Well supported. Ordinary room light before bed is enough to suppress melatonin, and reading on a light-emitting screen delays sleep and the body clock.",
+      studies: [
+        { c: "Gooley et al., Journal of Clinical Endocrinology & Metabolism, 2011", t: "Exposure to room light before bedtime suppresses melatonin onset and shortens melatonin duration in humans", f: "Room light in the hours before bed delayed melatonin and shortened its duration by about 90 minutes compared with dim light." },
+        { c: "Chang et al., PNAS, 2015", t: "Evening use of light-emitting eReaders negatively affects sleep, circadian timing, and next-morning alertness", f: "Reading on a light-emitting e-reader before bed delayed the body clock, reduced evening sleepiness and lowered alertness the next morning, compared with a printed book." }
+      ],
+      caution: "",
+      ts: "01:37:59" },
+
+    { n: 8, tab: "Sleep", name: "Sleep dark", short: "Make the bedroom dark, and sleep on your side.",
+      act: "Dark room or eye mask. Ten long exhales if you wake.",
+      doit: [
+        "Make the room as dark as you can. An eye mask is the cheap fix.",
+        "Earplugs and a cool bed help if noise or heat wake you.",
+        "Sleep on your side with your head slightly raised.",
+        "If you wake in the night: ten long exhales, then the eye sequence below.",
+        "After you get up, move: walk, shake out, skip rope. He says this helps drain fluid that pooled overnight."
+      ],
+      min: "Wear an eye mask.",
+      tool: "eyes",
+      why: "Light reaches the body clock even through closed eyelids and keeps the body in a more alert state. For side sleeping, the argument is that the brain's overnight waste-clearing system drains better in that position. The eye sequence is meant to quiet the brain circuits that track where your limbs are, which he says is a step toward falling asleep.",
+      ev: 2, evText: "Darkness is well supported: one night of moderate room light measurably worsened heart rate and blood sugar control the next morning. Side sleeping is early: he calls the gain slight, and the key posture study was done in rats. His claim that it clears bags under the eyes has no study behind it that this app could find. The eye-movement trick has, by his own account, only indirect support, and this app found no trial of it.",
+      studies: [
+        { c: "Mason et al., PNAS, 2022", t: "Light exposure during sleep impairs cardiometabolic function", f: "One night of sleep in 100 lux, compared with near darkness, raised night-time heart rate and next-morning insulin resistance in 20 young adults." },
+        { c: "Windred et al., PNAS, 2024", t: "Brighter nights and darker days predict higher mortality risk: A prospective analysis of personal light exposure in >88,000 individuals", f: "The brightest nights went with 21–34% higher risk of death. Observational." },
+        { c: "Xie et al., Science, 2013", t: "Sleep drives metabolite clearance from the adult brain", f: "In mice, the space between brain cells widens during sleep and waste products clear about twice as fast." },
+        { c: "Lee et al., Journal of Neuroscience, 2015", t: "The Effect of Body Posture on Brain Glymphatic Transport", f: "Anaesthetised rats cleared tracer from the brain most efficiently lying on their side." }
+      ],
+      caution: "Persistent insomnia, loud snoring or pauses in breathing deserve a doctor's visit, not a trick.",
+      ts: "01:37:59, 00:55:55 and 01:55:05" },
+
+    { n: 9, tab: "Food", name: "Eat for steady energy, walk after meals", short: "Protein, plants, some starch, then a short walk.",
+      act: "Protein and plants at each meal. Walk 5–10 minutes after.",
+      doit: [
+        "Build each meal around a protein that gives a lot of protein for its calories: eggs, fish, lean meat, or a planned plant combination.",
+        "Add vegetables and fruit for fibre and micronutrients.",
+        "Eat a low-sugar fermented food most days: sauerkraut, kimchi, beet kvass.",
+        "Cook with olive oil and a little butter. He advises skipping the seed oil argument.",
+        "Include some starch (rice, oats, potatoes, sourdough), especially at your last meal, and keep it from being buried in fat.",
+        "Walk for 5–10 minutes after eating. Stuck in a seat? Do seated calf raises, a few squats, or bounce your knee.",
+        "Aim for 7,000–8,000 steps across the day. Take the stairs and pace during calls."
+      ],
+      min: "A five-minute walk after your largest meal.",
+      why: "Working muscle pulls glucose out of the blood, so light movement after a meal flattens the spike. The soleus, a calf muscle, can keep doing this for hours. Fermented foods support a more varied gut microbiome. His case for starch is that glucose lowers cortisol, which helps sleep when the starch is eaten in the evening.",
+      ev: 2, evText: "Post-meal walking is strongly supported. Fermented foods have one good randomized trial behind them. The starch and cortisol reasoning is plausible but lightly tested. He is blunt in the episode that most nutrition research is weak.",
+      studies: [
+        { c: "Buffey et al., Sports Medicine, 2022", t: "The Acute Effects of Interrupting Prolonged Sitting Time in Adults with Standing and Light-Intensity Walking on Biomarkers of Cardiometabolic Health in Adults: A Systematic Review and Meta-analysis", f: "Across seven trials, short light walks lowered post-meal blood sugar compared with sitting, and did more than standing." },
+        { c: "Hamilton et al., iScience, 2022", t: "A potent physiological method to magnify and sustain soleus oxidative metabolism improves glucose and lipid regulation", f: "Seated calf raises kept up for hours cut the blood sugar rise after a glucose drink by 52% in 25 adults. He calls the method impractical and uses it to explain why walking works." },
+        { c: "Gao et al., Scandinavian Journal of Medicine & Science in Sports, 2024", t: "Enhanced muscle activity during interrupted sitting improves glycemic control in overweight and obese men", f: "Three-minute squat or walk breaks every 45 minutes lowered blood sugar more than a single 30-minute walk, in 18 overweight men. The episode describes the breaks as ten squats; each one lasted three minutes." },
+        { c: "Paluch et al., Lancet Public Health, 2022", t: "Daily steps and all-cause mortality: a meta-analysis of 15 international cohorts", f: "Risk of death fell as daily steps rose, levelling off at about 6,000–8,000 steps for adults over 60 and 8,000–10,000 for younger adults." },
+        { c: "Levine et al., Science, 1999", t: "Role of nonexercise activity thermogenesis in resistance to fat gain in humans", f: "When 16 adults were overfed by 1,000 kcal a day, those whose everyday movement rose the most gained the least fat." },
+        { c: "Wastyk et al., Cell, 2021", t: "Gut-microbiota-targeted diets modulate human immune status", f: "Ten weeks of fermented foods increased gut microbiome diversity and lowered 19 inflammatory proteins in 36 adults. A high-fibre diet did not." },
+        { c: "Afaghi et al., American Journal of Clinical Nutrition, 2007", t: "High-glycemic-index carbohydrate meals shorten sleep onset", f: "A high-glycaemic rice meal four hours before bed nearly halved the time 12 men took to fall asleep." },
+        { c: "Pontzer et al., Science, 2021", t: "Daily energy expenditure through the human life course", f: "Energy use, adjusted for body size, stays flat from age 20 to 60 and declines only after that, in data from more than 6,400 people. This is the basis for his point that metabolism need not fall with age." }
+      ],
+      caution: "If you have diabetes, kidney disease or a history of disordered eating, set food targets with your clinician.",
+      flag: "He says nutrition is one of his ten cards but never gives its number, so No. 9 is the slot left over. The walk after meals came up as a closing question from the host.",
+      ts: "00:38:35 and 02:04:22" },
+
+    { n: 10, tab: "Quiet", name: "Goal-free time", short: "Once a day, time with no goal and no input.",
+      act: "Sit, pray, draw or walk. No phone, no target.",
+      doit: [
+        "Once a day, step out of doing and responding: sit quietly, meditate, draw or listen to music. He sets no length. Ten minutes is a workable start.",
+        "Don't try to work anything out. Asking yourself what to do with your life is not how this works. Let wants surface as feelings and images.",
+        "Run the three daily checks he takes from the analyst James Hollis. Shut up: someone has it worse, so practise gratitude, giving it and receiving it. Suit up: prepare and look after yourself. Show up: do your part in the roles you hold.",
+        "If you pray, this is where it fits. He prays every night, asking for clarity and the energy to act well, not for outcomes.",
+        "Longer versions count too: a run, a hike, a camping trip.",
+        "Don't wait to find a calling. He says you find it while working hard at something else, and he plans his own life in five-year chunks."
+      ],
+      min: "Ten breaths of full attention before you get out of bed. That is his own morning minimum.",
+      why: "The argument he takes from Hollis: people who only fulfil roles and prepare for them can do it for decades and still end up miserable. Time outside stimulus and response lets less conscious wishes surface as feelings or images, which then shape what you notice and choose. He pairs this with the hard focus block: one period a day of full effort, one with none.",
+      ev: 1, evText: "The least evidence-based of the ten, and he presents it as personal experience. Nearby research exists: meditation programmes modestly reduce anxiety and low mood, gratitude exercises raise well-being in trials, and attending religious services is associated with longer life in observational data. He also cites a 2026 brain-imaging study of meditation and concludes that regular meditators can sleep about an hour less. The study did not measure how much sleep anyone needs.",
+      studies: [
+        { c: "Goyal et al., JAMA Internal Medicine, 2014", t: "Meditation programs for psychological stress and well-being: a systematic review and meta-analysis", f: "Across 47 trials, mindfulness meditation programmes gave moderate improvements in anxiety, depression and pain." },
+        { c: "Emmons & McCullough, Journal of Personality and Social Psychology, 2003", t: "Counting blessings versus burdens: an experimental investigation of gratitude and subjective well-being in daily life", f: "People who listed things they were grateful for each week reported higher well-being than those who listed hassles." },
+        { c: "Li et al., JAMA Internal Medicine, 2016", t: "Association of Religious Service Attendance With Mortality Among Women", f: "Among about 74,000 US nurses, attending services more than once a week went with 33% lower mortality over 16 years. Observational." },
+        { c: "Keating et al., PNAS, 2026", t: "Neurofluid circulation changes during a focused attention style of mindfulness meditation", f: "MRI of 23 experienced meditators showed brain fluid flow shifting toward a sleep-like pattern during focused-attention meditation. It did not measure waste clearance directly, and beginners were not tested." }
+      ],
+      caution: "",
+      ts: "01:48:34 and 01:18:25" }
+  ];
+
+  var SUPPS = [
+    { name: "EPA omega-3", dose: "At least 1 g of EPA a day, in prescription form", use: "Brain health, and probably heart health and lower inflammation. He doesn't eat oily fish, and prefers a prescription product for its purity and price.",
+      ev: "Mixed. A prescription EPA product at 4 g a day cut cardiovascular events in high-risk patients on statins. A large trial of 1 g of fish oil in the general population found no drop in major cardiovascular events or cancer.",
+      caution: "He names Lovaza. Lovaza contains both EPA and DHA; the EPA-only prescription product is icosapent ethyl (Vascepa), the one used in the first trial below. Whether a prescription suits you is your doctor's call. Higher doses are linked with more atrial fibrillation and can increase bleeding with blood thinners.",
+      studies: [
+        { c: "Bhatt et al., NEJM, 2019", t: "Cardiovascular Risk Reduction with Icosapent Ethyl for Hypertriglyceridemia" },
+        { c: "Manson et al., NEJM, 2019", t: "Marine n-3 Fatty Acids and Prevention of Cardiovascular Disease and Cancer" }
+      ] },
+    { name: "Vitamin D", dose: "5,000–10,000 IU a day", use: "Hormone health and general health. He says his own blood work looks better at 5,000 IU than at 3,000, and concedes that 10,000 may be a little high.",
+      ev: "Correcting a real deficiency matters. In people who are not deficient, a large trial of 2,000 IU a day found no reduction in cancer or cardiovascular events.",
+      caution: "This dose is above the 4,000 IU daily upper limit set by US and European authorities, and he waves off the usual advice to test first. Get a blood test and agree a dose with your doctor before going above 4,000 IU. Too much raises blood calcium.",
+      studies: [
+        { c: "Manson et al., NEJM, 2019", t: "Vitamin D Supplements and Prevention of Cancer and Cardiovascular Disease" },
+        { c: "NIH Office of Dietary Supplements", t: "Vitamin D: Fact Sheet for Health Professionals", url: "https://ods.od.nih.gov/factsheets/VitaminD-HealthProfessional/" }
+      ] },
+    { name: "Magnesium threonate or bisglycinate", dose: "None given in the episode", use: "Only if you sleep poorly. He says good sleepers need nothing for sleep, and that the two forms are interchangeable.",
+      ev: "Weak. A review of trials in older adults with insomnia found a small benefit from low-quality evidence.",
+      caution: "The upper limit for supplemental magnesium is 350 mg a day. More can cause diarrhoea, and it builds up in people with kidney disease.",
+      studies: [
+        { c: "Mah & Pitre, BMC Complementary Medicine and Therapies, 2021", t: "Oral magnesium supplementation for insomnia in older adults: a Systematic Review & Meta-Analysis" },
+        { c: "NIH Office of Dietary Supplements", t: "Magnesium: Fact Sheet for Health Professionals", url: "https://ods.od.nih.gov/factsheets/Magnesium-HealthProfessional/" }
+      ] },
+    { name: "Alpha-GPC", dose: "600 or 900 mg, with 600 mg of odourless garlic", use: "A stimulant to pair with caffeine before hard training or work, especially late in the day. He says it sharpens focus without harming sleep and adds REM sleep. The garlic is meant to offset a rise in TMAO, a compound linked with heart disease.",
+      ev: "Thin for healthy adults. The safety signal is larger than the benefit data.",
+      caution: "A Korean study of 12 million adults over 50 found 46% more strokes over ten years among people prescribed alpha-GPC. Observational, but large. Whether garlic offsets the risk has not been tested in a trial this app could find.",
+      studies: [
+        { c: "Lee et al., JAMA Network Open, 2021", t: "Association of L-α Glycerylphosphorylcholine With Subsequent Stroke Risk After 10 Years" }
+      ] },
+    { name: "Caffeine", dose: "200–400 mg a day", use: "Alertness. He cites a link with lower dementia risk and says himself that it is a correlation, not proof.",
+      ev: "The dementia link is observational: moderate coffee and tea drinkers in UK Biobank had fewer strokes and less dementia. It does not show that caffeine is the cause.",
+      caution: "Up to 400 mg a day is considered safe for most adults, and 200 mg in pregnancy. Keep it early: a dose six hours before bed still cut sleep by about an hour.",
+      studies: [
+        { c: "Zhang et al., PLoS Medicine, 2021", t: "Consumption of coffee and tea and risk of developing stroke, dementia, and poststroke dementia: A cohort study in the UK Biobank" },
+        { c: "Drake et al., Journal of Clinical Sleep Medicine, 2013", t: "Caffeine effects on sleep taken 0, 3, or 6 hours before going to bed" }
+      ] },
+    { name: "Creatine monohydrate", dose: "5–10 g a day", use: "His last, optional pick. He has taken it since his teens for strength, and says the thinking benefit shows mostly under sleep loss or stress.",
+      ev: "The best-studied supplement here for muscle. For cognition the evidence is early: small trials suggest a benefit for memory and for performance when sleep-deprived.",
+      caution: "Generally well tolerated at 3–5 g. Ask your doctor first if you have kidney disease.",
+      studies: [
+        { c: "Gordji-Nejad et al., Scientific Reports, 2024", t: "Single dose creatine improves cognitive performance and induces changes in cerebral high energy phosphates during sleep deprivation" },
+        { c: "Avgerinos et al., Experimental Gerontology, 2018", t: "Effects of creatine supplementation on cognitive function of healthy individuals: A systematic review of randomized controlled trials" }
+      ] }
+  ];
+
+  var ORDER = [1, 2, 3, 4, 5, 9, 6, 7, 10, 8];
+  var EV_WORD = { 1: "Early", 2: "Moderate", 3: "Strong" };
+  var KEEP = 7;
+
+  /* ---------- helpers ---------- */
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function isTime(s) { return typeof s === "string" && /^\d{2}:\d{2}$/.test(s); }
+  function toMin(s) { var p = s.split(":"); return (+p[0]) * 60 + (+p[1]); }
+  function fmt(m) { m = ((Math.round(m) % 1440) + 1440) % 1440; var h = Math.floor(m / 60), mm = m % 60; return (h < 10 ? "0" : "") + h + ":" + (mm < 10 ? "0" : "") + mm; }
+  function pad(n) { return n < 10 ? "0" + n : "" + n; }
+  function keyOf(d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+  // A "day" rolls over at 04:00 so ticking "Sleep dark" after midnight stays on the right day.
+  function dayDate(offset) { var d = new Date(Date.now() - 4 * 3600 * 1000); d.setHours(12, 0, 0, 0); d.setDate(d.getDate() - (offset || 0)); return d; }
+  function studyUrl(s) {
+    if (s.url) return s.url;
+    return (s.scholar ? "https://scholar.google.com/scholar?q=" : "https://pubmed.ncbi.nlm.nih.gov/?term=") + encodeURIComponent(s.t);
+  }
+  function bits(m) { var c = 0; for (var i = 0; i < 10; i++) if (m & (1 << i)) c++; return c; }
+
+  /* ---------- state ---------- */
+  var LS = "tenaday.v1";
+  var state = { wake: "07:00", bed: "23:00", st: 0, days: {} };
+  function loadLocal() {
+    try {
+      var s = JSON.parse(localStorage.getItem(LS));
+      if (s && typeof s === "object") {
+        if (isTime(s.wake)) state.wake = s.wake;
+        if (isTime(s.bed)) state.bed = s.bed;
+        if (typeof s.st === "number") state.st = s.st;
+        if (s.days && typeof s.days === "object") state.days = s.days;
+      }
+    } catch (e) {}
+  }
+  function saveLocal() { try { localStorage.setItem(LS, JSON.stringify(state)); } catch (e) {} }
+  function mask(key) { var d = state.days[key]; return d && typeof d.m === "number" ? d.m : 0; }
+  function isDone(n) { return !!(mask(keyOf(dayDate())) & (1 << (n - 1))); }
+  function setDone(n, on) {
+    var k = keyOf(dayDate()), m = mask(k);
+    m = on ? (m | (1 << (n - 1))) : (m & ~(1 << (n - 1)));
+    state.days[k] = { m: m, t: Date.now() };
+    prune(); persist(); renderDynamic();
+  }
+  function prune() {
+    var keys = Object.keys(state.days).sort();
+    while (keys.length > 180) delete state.days[keys.shift()];
+  }
+
+  /* account sync (optional): one private document per signed-in viewer */
+  var remoteDoc = null, saving = false, dirty = false, saveTimer = null;
+  function persist() { saveLocal(); if (remoteDoc) { clearTimeout(saveTimer); saveTimer = setTimeout(pushRemote, 900); } }
+  function pushRemote() {
+    if (!remoteDoc) return;
+    if (saving) { dirty = true; return; }
+    saving = true; dirty = false;
+    var body = { wake: state.wake, bed: state.bed, st: state.st, days: JSON.parse(JSON.stringify(state.days)) };
+    remoteDoc.set(body).then(function () { saving = false; if (dirty) pushRemote(); }, function (e) {
+      saving = false;
+      if (e && e.code === "unavailable") { setTimeout(pushRemote, 1500 + Math.random() * 1500); return; }
+      remoteDoc = null; setSync(false);
+    });
+  }
+  function mergeRemote(r) {
+    var localNewer = false, rd = {};
+    if (r && typeof r === "object") {
+      if ((r.st || 0) > (state.st || 0)) {
+        if (isTime(r.wake)) state.wake = r.wake;
+        if (isTime(r.bed)) state.bed = r.bed;
+        state.st = r.st;
+      } else if ((state.st || 0) > (r.st || 0)) localNewer = true;
+      if (r.days && typeof r.days === "object") rd = r.days;
+    }
+    Object.keys(rd).forEach(function (k) {
+      var a = state.days[k], b = rd[k];
+      if (!b || typeof b.m !== "number") return;
+      if (!a || (b.t || 0) > (a.t || 0)) state.days[k] = { m: b.m, t: b.t || 0 };
+    });
+    Object.keys(state.days).forEach(function (k) {
+      var b = rd[k];
+      if (!b || (state.days[k].t || 0) > (b.t || 0)) localNewer = true;
+    });
+    return localNewer;
+  }
+  function setSync(on) {
+    $("syncNote").textContent = on
+      ? "Your ticks are saved to your Claude account and follow you across devices. Nobody else can see them."
+      : "Your ticks are saved on this device.";
+  }
+  function initRemote() {
+    if (!window.claude || typeof window.claude.use !== "function") return;
+    Promise.all([window.claude.use("db"), window.claude.use("user")]).then(function (r) {
+      var db = r[0], user = r[1];
+      if (!db || !user) return;
+      return user.id().then(function (id) {
+        if (!id) return;
+        var doc = db.doc("data/users/" + id + "/state");
+        return doc.get().then(function (snap) {
+          var newer = mergeRemote(snap.exists ? snap.data() : null);
+          remoteDoc = doc; setSync(true); saveLocal();
+          $("wake").value = state.wake; $("bed").value = state.bed;
+          renderDynamic();
+          if (newer) pushRemote();
+        });
+      });
+    }).catch(function () {});
+  }
+
+  /* ---------- time windows ---------- */
+  function dayShape() {
+    var W = toMin(state.wake), B = toMin(state.bed), D = (B - W + 1440) % 1440;
+    if (D < 480 || D > 1260) D = 960;
+    return { W: W, D: D, B: W + D };
+  }
+  function windows() {
+    var s = dayShape(), W = s.W, D = s.D, B = s.B, w = {};
+    function span(a, b) { return fmt(a) + "–" + fmt(b); }
+    w[1] = { s: W, e: W + 30, label: span(W, W + 30), hint: "Within 30 minutes of waking" };
+    w[2] = { s: W, e: W + 60, label: span(W, W + 60), hint: "In your first hour" };
+    w[3] = { s: W, e: W + 180, label: span(W, W + 180), hint: "In your first 3 hours" };
+    w[4] = { s: W + 120, e: W + 360, label: span(W + 120, W + 360), hint: "One block, best after training" };
+    w[5] = { label: "Any time", hint: "When stress spikes" };
+    w[9] = { label: "At meals", hint: "Walk 5–10 minutes after eating" };
+    var ls = W + Math.round(D * 2 / 3 / 5) * 5, le = B - 180; if (le - ls < 60) le = ls + 90;
+    w[6] = { s: ls, e: le, label: span(ls, le), hint: "Last third of your day, before dark" };
+    w[7] = { s: B - 120, e: B, label: span(B - 120, B), hint: "Screens off by " + fmt(B - 30) };
+    w[10] = { s: B - 60, e: B, label: span(B - 60, B), hint: "Once a day. He does it before sleep" };
+    w[8] = { s: B, e: W + 1440, label: span(B, W), hint: "All night" };
+    return w;
+  }
+  function nowRel() { var d = new Date(), n = d.getHours() * 60 + d.getMinutes(); return (n - dayShape().W + 1440) % 1440; }
+  function isNow(win) { if (win.s == null) return false; var W = dayShape().W, r = nowRel(); return r >= win.s - W && r < win.e - W; }
+
+  /* ---------- static render ---------- */
+  function byN(n) { for (var i = 0; i < P.length; i++) if (P[i].n === n) return P[i]; }
+  function pips(level) {
+    var h = '<span class="pips" aria-hidden="true">';
+    for (var i = 1; i <= 3; i++) h += '<i class="' + (i <= level ? "on" : "") + '"></i>';
+    return h + "</span>";
+  }
+  function studiesHtml(list) {
+    return '<ul class="studies">' + list.map(function (s) {
+      return "<li><span class=\"cite\">" + esc(s.c) + "</span>" +
+        '<a href="' + esc(studyUrl(s)) + '" target="_blank" rel="noopener">' + esc(s.t) + "</a>" +
+        (s.f ? '<span class="find">' + esc(s.f) + "</span>" : "") + "</li>";
+    }).join("") + "</ul>";
+  }
+  function toolHtml(kind) {
+    if (kind === "pacer") {
+      return '<div class="tool"><span class="label">Breathe with it</span><div class="pacer">' +
+        '<div class="lung"><span id="lung"></span></div>' +
+        '<div><div class="phase" id="phase" aria-live="polite">Three rounds, about 30 seconds.</div>' +
+        '<button class="btn" id="pacerBtn" type="button">Start</button></div></div></div>';
+    }
+    if (kind === "eyes") {
+      return '<div class="tool"><span class="label">Back to sleep, eyes closed</span><ol style="margin:0;padding-left:20px;display:grid;gap:6px">' +
+        "<li>Move your eyes slowly to one side, then the other.</li><li>Up, then down.</li>" +
+        "<li>Circle one way, then the other.</li><li>Point them gently toward your nose without crossing them.</li>" +
+        "<li>Breathe out slowly. Repeat two or three times.</li></ol></div>";
+    }
+    return "";
+  }
+  function panelHtml(p) {
+    return '<section class="panel" id="panel-p' + p.n + '" hidden>' +
+      '<div class="phead"><span class="num">Protocol ' + pad(p.n) + " of 10</span><h2>" + esc(p.name) + "</h2>" +
+      '<p class="lede">' + esc(p.short) + "</p>" +
+      '<div class="meta"><span class="when" data-when="' + p.n + '"></span>' +
+      '<span class="ev" title="How well the research supports this protocol">' + pips(p.ev) + "Evidence: " + EV_WORD[p.ev] + "</span></div></div>" +
+      (p.flag ? '<p class="flag">' + esc(p.flag) + "</p>" : "") +
+      '<div class="sec"><h3>Do this</h3><ul>' + p.doit.map(function (d) { return "<li>" + esc(d) + "</li>"; }).join("") + "</ul></div>" +
+      '<p class="minimum"><b>On a bad day:</b> ' + esc(p.min) + "</p>" +
+      toolHtml(p.tool) +
+      '<div class="sec"><h3>Why it works</h3><p>' + esc(p.why) + "</p></div>" +
+      '<div class="sec"><h3>What the research says</h3><p>' + esc(p.evText) + "</p>" + studiesHtml(p.studies) + "</div>" +
+      (p.caution ? '<div class="sec"><h3>Watch out</h3><p class="caution">' + esc(p.caution) + "</p></div>" : "") +
+      '<div class="pfoot"><button class="btn" type="button" data-toggle="' + p.n + '"></button>' +
+      '<span class="note">In the episode at <span class="mono">' + esc(p.ts) + "</span></span></div></section>";
+  }
+  function suppsHtml() {
+    return '<section class="panel" id="panel-supps" hidden><div class="phead"><span class="num">Add-on</span><h2>Supplements</h2>' +
+      '<p class="lede">Asked which five he would keep for life, he named four, then added caffeine and creatine.</p></div>' +
+      '<p class="note" style="max-width:66ch">He treats supplements as extras on top of the ten, never a replacement. What follows records what he said and what the research shows. It is not a recommendation to take anything. In the episode at <span class="mono">01:59:20</span>.</p>' +
+      '<div class="supp">' + [2, 0, 1, 3, 4, 5].map(function (i) { var s = SUPPS[i];
+        return "<article><h3>" + esc(s.name) + '</h3><span class="dose">Dose given: ' + esc(s.dose) + "</span><dl>" +
+          "<dt>What he takes it for</dt><dd>" + esc(s.use) + "</dd>" +
+          "<dt>What the research says</dt><dd>" + esc(s.ev) + "</dd>" +
+          "<dt>Watch out</dt><dd>" + esc(s.caution) + "</dd></dl>" + studiesHtml(s.studies) + "</article>";
+      }).join("") + "</div>" +
+      '<div class="sec"><h3>Also named</h3><p>He says the book also covers L-tyrosine, theanine with low-dose caffeine, tart cherry, apigenin and the prescription sleep drug daridorexant. He gives no doses or detail in the episode.</p></div>' +
+      '<div class="sec"><h3>Left out on purpose</h3><p>Peptides, GLP-1 microdosing and psychedelics take up a long stretch of the episode. He says himself that they are experimental and not in his book, so they are not in this app.</p></div></section>';
+  }
+  function aboutHtml() {
+    return '<section class="panel" id="panel-about" hidden><div class="phead"><span class="num">About</span><h2>Where this comes from</h2></div>' +
+      '<div class="sec about"><p>The ten protocols and the supplement list follow the episode of The Diary Of A CEO with Andrew Huberman released on 3 September 2026, where he walks through ten practices from his book Protocols. The wording here is a summary, not a transcript. This app is not affiliated with Andrew Huberman, Steven Bartlett or their companies.</p>' +
+      '<p><a href="https://open.spotify.com/episode/1jtTjklF331gB4TJXty31Q" target="_blank" rel="noopener">Listen to the episode</a> · <a href="https://stevenbartlett.com/wp-content/uploads/2026/09/DOAC-Prof-Andrew-Huberman-Independent-Research-Further-Reading-v2.1.pdf" target="_blank" rel="noopener">The show\'s own independent fact check</a></p></div>' +
+      '<div class="sec about"><h3>How the evidence ratings work</h3><ul><li><b>Strong:</b> several human studies, including trials or very large cohorts, point the same way.</li><li><b>Moderate:</b> some good human studies, but small, single-lab, or covering only part of the claim.</li><li><b>Early:</b> animal work, observational links or personal experience.</li></ul>' +
+      "<p>The studies listed were chosen for this app as the closest published research to each claim. They are not the reference list from his book. Each link opens a search for the paper by its title.</p></div>" +
+      '<div class="sec about"><h3>Still to confirm</h3><ul><li>He numbers protocols 1, 2, 3, 5, 6 and 10 out loud. The host calls the focus block number 4, and 7 and 8 are named together as the evening and night protocols. He says nutrition is one of the ten but never gives its number, so No. 9 is the slot left over.</li><li>Side sleeping, supplements and the walk after meals came up as the host\'s closing questions. They sit here under the protocol they fit best.</li><li>The study figures have not all been checked against the papers yet.</li></ul></div>' +
+      '<div class="sec about"><h3>Not medical advice</h3><p>This is general information for healthy adults. It does not replace advice from a clinician who knows you. Check with one before changing exercise, diet, light exposure or supplements if you are pregnant, take medication or have a health condition.</p></div></section>';
+  }
+
+  var TABS = [{ id: "today", label: "Today" }].concat(P.map(function (p) { return { id: "p" + p.n, label: p.tab, n: p.n }; }),
+    [{ id: "supps", label: "Supplements" }, { id: "about", label: "About" }]);
+
+  function buildStatic() {
+    $("tabs").innerHTML = TABS.map(function (t) {
+      return '<button class="tab" type="button" data-tab="' + t.id + '">' + (t.n ? '<span class="n">' + t.n + "</span>" : "") + esc(t.label) + "</button>";
+    }).join("");
+    $("panels").insertAdjacentHTML("beforeend", P.map(panelHtml).join("") + suppsHtml() + aboutHtml());
+    $("dayList").innerHTML = ORDER.map(function (n) {
+      var p = byN(n);
+      return '<li data-n="' + n + '"><input type="checkbox" id="chk-' + n + '">' +
+        '<div><div class="row-top"><span class="when" data-when="' + n + '"></span><span data-hint="' + n + '"></span><span class="chip-now" data-now="' + n + '" hidden>Now</span></div>' +
+        '<label for="chk-' + n + '">' + esc(p.name) + "</label>" +
+        '<p class="act">' + esc(p.act) + "</p>" +
+        '<button class="linkbtn" type="button" data-tab="p' + n + '">How and why, No. ' + n + "</button></div></li>";
+    }).join("");
+  }
+
+  /* ---------- dynamic render ---------- */
+  function streak() {
+    var s = 0, i = 0;
+    if (bits(mask(keyOf(dayDate(0)))) < KEEP) i = 1;
+    for (; i < 400; i++) { if (bits(mask(keyOf(dayDate(i)))) >= KEEP) s++; else break; }
+    return s;
+  }
+  function shareText() {
+    var m = mask(keyOf(dayDate())), sq = "";
+    for (var i = 0; i < 10; i++) sq += (m & (1 << i)) ? "■" : "□";
+    var d = dayDate().toLocaleDateString(undefined, { weekday: "short", day: "numeric", month: "short" });
+    var s = streak();
+    return "Ten a Day · " + d + "\n" + bits(m) + "/10  " + sq + "\n" +
+      (s > 0 ? "Streak: " + s + (s === 1 ? " day" : " days") + "\n" : "") +
+      "Water, light, training, focus, sigh, late light, dim evening, dark sleep, food + walk, quiet time.\nWhat's yours?";
+  }
+  function renderDynamic() {
+    var w = windows(), todayMask = mask(keyOf(dayDate()));
+    document.querySelectorAll("[data-when]").forEach(function (el) { el.textContent = w[+el.getAttribute("data-when")].label; });
+    document.querySelectorAll("[data-hint]").forEach(function (el) { el.textContent = w[+el.getAttribute("data-hint")].hint; });
+    P.forEach(function (p) {
+      var done = !!(todayMask & (1 << (p.n - 1)));
+      var chk = $("chk-" + p.n); chk.checked = done;
+      chk.closest("li").classList.toggle("is-done", done);
+      var nowEl = document.querySelector('[data-now="' + p.n + '"]'); nowEl.hidden = done || !isNow(w[p.n]);
+      var tb = document.querySelector('[data-toggle="' + p.n + '"]');
+      tb.textContent = done ? "Done today. Undo" : "Mark done today"; tb.classList.toggle("ghost", done);
+      document.querySelector('.tab[data-tab="p' + p.n + '"]').classList.toggle("is-done", done);
+    });
+    var c = bits(todayMask), s = streak();
+    $("scoreNum").textContent = c;
+    $("scoreNote").textContent = c >= KEEP ? "Today counts toward your streak." : (KEEP - c) + " more and today counts toward your streak.";
+    $("streakNum").textContent = s; $("streakUnit").textContent = s === 1 ? "day" : "days";
+    var wk = "";
+    for (var i = 6; i >= 0; i--) {
+      var d = dayDate(i), n = bits(mask(keyOf(d)));
+      wk += '<div class="col' + (n >= KEEP ? " kept" : "") + (i === 0 ? " today" : "") + '"><div class="bar-wrap"><div class="bar" style="height:' + (n * 10) + '%"></div></div>' +
+        '<span class="mono">' + n + "</span><span>" + d.toLocaleDateString(undefined, { weekday: "narrow" }) + "</span></div>";
+    }
+    $("week").innerHTML = wk;
+    $("shareText").textContent = shareText();
+    drawRhythm();
+  }
+
+  /* cortisol and melatonin across one 24 h cycle, as a labelled schematic */
+  function drawRhythm() {
+    var host = $("rhythm"), width = Math.max(280, Math.round(host.clientWidth || 600)), H = 150;
+    var s = dayShape(), D = s.D / 60, x0 = 8, x1 = width - 8, yTop = 22, yBot = 104;
+    function X(t) { return x0 + (x1 - x0) * t / 24; }
+    function Y(v) { return yBot - (yBot - yTop) * v; }
+    function cort(t) {
+      var v = t < 0.7 ? 0.55 + 0.45 * (t / 0.7) : 0.1 + 0.9 * Math.exp(-(t - 0.7) / 4.3);
+      if (t > 19) v = Math.max(v, 0.1 + 0.45 * Math.pow((t - 19) / 5, 2));
+      return v;
+    }
+    var mid = D + (24 - D) / 2;
+    function mel(t) { function g(c) { return Math.exp(-Math.pow((t - c) / 2.7, 2)); } return 0.04 + 0.9 * Math.max(g(mid), g(mid - 24)); }
+    function path(fn) { var d = ""; for (var i = 0; i <= 96; i++) { var t = i / 4; d += (i ? "L" : "M") + X(t).toFixed(1) + " " + Y(fn(t)).toFixed(1); } return d; }
+    var r = nowRel() / 60, ticks = [[0, fmt(s.W) + " wake", "start"], [D / 2, fmt(s.W + s.D / 2), "middle"], [D, fmt(s.B) + " bed", "middle"], [24, fmt(s.W), "end"]];
+    var nowAnchor = X(r) < 40 ? "start" : (X(r) > width - 40 ? "end" : "middle");
+    var svg = '<svg viewBox="0 0 ' + width + " " + H + '" width="' + width + '" height="' + H + '" role="img" aria-label="Schematic of cortisol peaking after waking and melatonin peaking during sleep, with the current time marked">' +
+      '<rect x="' + X(D) + '" y="' + yTop + '" width="' + (X(24) - X(D)) + '" height="' + (yBot - yTop) + '" fill="var(--sleep)"/>' +
+      '<line x1="' + x0 + '" y1="' + yBot + '" x2="' + x1 + '" y2="' + yBot + '" stroke="var(--line)" stroke-width="1"/>' +
+      '<path d="' + path(mel) + '" fill="none" stroke="var(--mel)" stroke-width="2" stroke-dasharray="5 4"/>' +
+      '<path d="' + path(cort) + '" fill="none" stroke="var(--accent)" stroke-width="2.5"/>' +
+      '<text x="' + (X(1.7) + 4) + '" y="' + (yTop + 9) + '" fill="var(--accent)" stroke="var(--bg)" stroke-width="4" paint-order="stroke" font-size="12.5" font-family="var(--mono)">cortisol</text>' +
+      '<line x1="' + X(r) + '" y1="' + (yTop - 4) + '" x2="' + X(r) + '" y2="' + yBot + '" stroke="var(--ink)" stroke-width="1.5"/>' +
+      '<text x="' + (X(mid - 3.2) - 6) + '" y="' + Y(0.5) + '" fill="var(--mel)" stroke="var(--bg)" stroke-width="4" paint-order="stroke" font-size="12.5" font-family="var(--mono)" text-anchor="end">melatonin</text>' +
+      '<text x="' + X(r) + '" y="' + (yTop - 8) + '" fill="var(--ink)" font-size="11.5" font-family="var(--mono)" text-anchor="' + nowAnchor + '">now</text>' +
+      ticks.map(function (t) {
+        return '<line x1="' + X(t[0]) + '" y1="' + yBot + '" x2="' + X(t[0]) + '" y2="' + (yBot + 5) + '" stroke="var(--muted)" stroke-width="1"/>' +
+          '<text x="' + X(t[0]) + '" y="' + (yBot + 20) + '" fill="var(--muted)" font-size="11.5" font-family="var(--mono)" text-anchor="' + t[2] + '">' + t[1] + "</text>";
+      }).join("") +
+      '<text x="' + (X(D) + (X(24) - X(D)) / 2) + '" y="' + (yBot + 38) + '" fill="var(--muted)" font-size="11.5" font-family="var(--mono)" text-anchor="middle">asleep</text>' +
+      "</svg>";
+    host.innerHTML = svg;
+  }
+
+  /* ---------- tabs ---------- */
+  function show(id, fromHash) {
+    if (!TABS.some(function (t) { return t.id === id; })) id = "today";
+    TABS.forEach(function (t) { $("panel-" + t.id).hidden = t.id !== id; });
+    document.querySelectorAll(".tab").forEach(function (b) {
+      var on = b.getAttribute("data-tab") === id;
+      b.setAttribute("aria-current", on ? "true" : "false");
+      if (on && b.scrollIntoView) b.scrollIntoView({ inline: "center", block: "nearest" });
+    });
+    if (!fromHash) { try { history.replaceState(null, "", "#" + id); } catch (e) {} window.scrollTo(0, 0); }
+    if (id === "today") drawRhythm();
+    stopPacer();
+  }
+
+  /* ---------- sigh pacer ---------- */
+  var pacerTimer = null, pacerOn = false;
+  var PH = [["Inhale through the nose", 2000, 0.8], ["Second, short inhale", 1000, 1], ["Long exhale through the mouth", 6000, 0.35]];
+  function stopPacer() {
+    clearTimeout(pacerTimer); pacerOn = false;
+    var b = $("pacerBtn"); if (!b) return;
+    b.textContent = "Start"; $("lung").style.transitionDuration = "400ms"; $("lung").style.transform = "scale(.35)";
+  }
+  function runPacer(round, i) {
+    if (!pacerOn) return;
+    if (round >= 3) { stopPacer(); $("phase").textContent = "Done. Notice your heart rate."; return; }
+    var ph = PH[i];
+    $("phase").textContent = ph[0] + " (round " + (round + 1) + " of 3)";
+    $("lung").style.transitionDuration = ph[1] + "ms"; $("lung").style.transform = "scale(" + ph[2] + ")";
+    pacerTimer = setTimeout(function () { if (i === 2) runPacer(round + 1, 0); else runPacer(round, i + 1); }, ph[1]);
+  }
+
+  /* ---------- events ---------- */
+  function toast(msg) { var t = $("toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(function () { t.hidden = true; }, 2200); }
+  function wire() {
+    document.addEventListener("click", function (e) {
+      var tab = e.target.closest("[data-tab]"); if (tab) { show(tab.getAttribute("data-tab")); return; }
+      var tg = e.target.closest("[data-toggle]"); if (tg) { var n = +tg.getAttribute("data-toggle"); setDone(n, !isDone(n)); return; }
+      if (e.target.id === "pacerBtn") {
+        if (pacerOn) { stopPacer(); $("phase").textContent = "Stopped."; }
+        else { pacerOn = true; e.target.textContent = "Stop"; runPacer(0, 0); }
+      }
+    });
+    $("dayList").addEventListener("change", function (e) {
+      if (e.target.type === "checkbox") setDone(+e.target.id.slice(4), e.target.checked);
+    });
+    ["wake", "bed"].forEach(function (id) {
+      $(id).addEventListener("change", function (e) {
+        if (!isTime(e.target.value)) return;
+        state[id] = e.target.value; state.st = Date.now(); persist(); renderDynamic();
+      });
+    });
+    $("copyBtn").addEventListener("click", function () {
+      var text = shareText();
+      function fallback() {
+        var r = document.createRange(); r.selectNodeContents($("shareText"));
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        toast("Selected. Copy it from here.");
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { toast("Copied"); }, fallback);
+      else fallback();
+    });
+    window.addEventListener("hashchange", function () { show(location.hash.slice(1), true); });
+    var rt; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(drawRhythm, 150); });
+    setInterval(renderDynamic, 60000);
+  }
+
+  loadLocal();
+  buildStatic();
+  $("wake").value = state.wake; $("bed").value = state.bed;
+  wire();
+  renderDynamic();
+  show(location.hash.slice(1) || "today", true);
+  initRemote();
+})();
+</script>
+
+</body></html>
