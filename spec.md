@@ -14,6 +14,7 @@ These were agreed with the owner after the brief was written. Where they differ 
 ## Decisions 2026-10-21
 
 - **Name and domain: Uberman, at `uberman.barrosbuilds.com`.** This is a deliberate exception to content rule 3. The owner chose the pun ("über", German for "over" or "super", close to "Huberman") knowing it sounds like the name and carries trademark risk. The product is "Uberman", with "Ten a Day: ten protocols a day to become über." as its tagline. The header and About page still say it is unofficial, and Huberman's and Bartlett's actual names stay out of the product name, logo and titles. If a rights holder objects, go back to "Ten a Day" at a neutral subdomain such as `tenaday.barrosbuilds.com`. Storage keys stay `tenaday.*` so saved data survives.
+- **Superman palette and "10" mark.** Colours follow the owner's Superman theme (navy, red, yellow, blue); only the colours, never the trademarked shield. The "10" mark is the app icon and sits in the header above the streak. The token table below reflects this.
 - **Host: Vercel**, serving the static export.
 
 ## Product
@@ -49,16 +50,16 @@ Tokens (light / dark):
 
 | Token | Light | Dark | Use |
 |---|---|---|---|
-| `--bg` | `#F1F4F7` | `#0D151E` | page |
-| `--surface` | `#FFFFFF` | `#15202B` | inputs, tool boxes |
-| `--ink` | `#15212C` | `#E7EDF2` | text |
-| `--muted` | `#52616E` | `#9BAAB7` | secondary text |
-| `--line` | `#D3DBE2` | `#2A3947` | hairlines |
-| `--accent` | `#B8460E` | `#FF9B52` | links, active tab, cortisol curve |
-| `--accent-soft` | `#FBE7DA` | `#3A2415` | "Now" chip, notes |
-| `--done` | `#1B7A66` | `#53C7A9` | ticked, kept days |
-| `--mel` | `#3F47B5` | `#A3ABFF` | melatonin curve |
-| `--sleep` | `#E2E6F3` | `#1A2140` | sleep shading |
+| `--bg` | `#F2F5FB` | `#0A1226` | page |
+| `--surface` | `#FFFFFF` | `#111C36` | inputs, tool boxes |
+| `--ink` | `#0D1B3D` | `#E8EEFB` | text |
+| `--muted` | `#4A5878` | `#9EABC8` | secondary text |
+| `--line` | `#D2DAE9` | `#24345A` | hairlines |
+| `--accent` | `#C8201A` | `#FF6B5E` | links, active tab, cortisol curve |
+| `--accent-soft` | `#FFF0B0` | `#3A3212` | "Now" chip, notes |
+| `--done` | `#0B5CC4` | `#5AA0FF` | ticked, kept days |
+| `--mel` | `#6A3FB5` | `#C0A3FF` | melatonin curve |
+| `--sleep` | `#E3E8F5` | `#17213F` | sleep shading |
 | `--dawn` `--noon` `--dusk` | `#F0A24F` `#86C3E8` `#D4728A` | same | rail |
 | `--night` | `#2A2E6E` | `#4A50B0` | rail |
 

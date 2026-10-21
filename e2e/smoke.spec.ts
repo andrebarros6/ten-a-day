@@ -20,7 +20,7 @@ for (const scheme of ["light", "dark"] as const) {
       expect(await overflow(page), path).toBeLessThanOrEqual(0);
     }
     const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
-    expect(bg).toBe(scheme === "dark" ? "rgb(13, 21, 30)" : "rgb(241, 244, 247)");
+    expect(bg).toBe(scheme === "dark" ? "rgb(10, 18, 38)" : "rgb(242, 245, 251)");
   });
 }
 
@@ -104,7 +104,7 @@ test("an explicit theme choice overrides the system setting and persists", async
   await page.getByRole("button", { name: "Dark" }).click();
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
-  expect(await page.evaluate(() => getComputedStyle(document.body).backgroundColor)).toBe("rgb(13, 21, 30)");
+  expect(await page.evaluate(() => getComputedStyle(document.body).backgroundColor)).toBe("rgb(10, 18, 38)");
 });
 
 test("an inbound referral code is stored and delete removes everything", async ({ page }) => {
