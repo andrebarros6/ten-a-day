@@ -19,6 +19,14 @@ export const metadata: Metadata = {
   ...(APP_URL ? { metadataBase: new URL(APP_URL) } : {}),
   title: { default: meta.name + " · " + m.masthead.tagline, template: "%s · " + meta.name },
   description: m.masthead.sub,
+  // The image comes from app/opengraph-image.png and is added to every page.
+  openGraph: {
+    type: "website",
+    siteName: meta.name,
+    title: meta.name + " · " + m.masthead.tagline,
+    description: m.masthead.sub,
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {
