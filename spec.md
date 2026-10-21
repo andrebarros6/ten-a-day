@@ -11,6 +11,11 @@ These were agreed with the owner after the brief was written. Where they differ 
 - **Static export.** The app builds to plain files that any static host can serve.
 - **Privacy by construction.** Nothing a user enters leaves their device. There is no analytics.
 
+## Decisions 2026-10-21
+
+- **Name and domain: Uberman, at `uberman.barrosbuilds.com`.** This is a deliberate exception to content rule 3. The owner chose the pun ("über", German for "over" or "super", close to "Huberman") knowing it sounds like the name and carries trademark risk. The product is "Uberman", with "Ten a Day: ten protocols a day to become über." as its tagline. The header and About page still say it is unofficial, and Huberman's and Bartlett's actual names stay out of the product name, logo and titles. If a rights holder objects, go back to "Ten a Day" at a neutral subdomain such as `tenaday.barrosbuilds.com`. Storage keys stay `tenaday.*` so saved data survives.
+- **Host: Vercel**, serving the static export.
+
 ## Product
 
 - **User:** someone who heard the episode and wants to actually do the ten things, daily, without re-listening to two hours of audio.

@@ -16,7 +16,7 @@ const plexMono = IBM_Plex_Mono({ variable: "--font-plex-mono", subsets: ["latin"
 
 export const metadata: Metadata = {
   ...(APP_URL ? { metadataBase: new URL(APP_URL) } : {}),
-  title: { default: meta.name, template: "%s · " + meta.name },
+  title: { default: meta.name + " · " + m.masthead.tagline, template: "%s · " + meta.name },
   description: m.masthead.sub,
 };
 
@@ -46,6 +46,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               >
                 {meta.name}
               </Link>
+              <p className="mt-1 font-display text-[clamp(17px,4.4vw,21px)] leading-snug font-medium text-ink">
+                {m.masthead.tagline}
+              </p>
               <p className="mt-1.5 max-w-[46ch] text-[15px] text-muted">{m.masthead.sub}</p>
             </div>
             <Streak />

@@ -36,7 +36,7 @@ test("ticks persist across a reload and drive score, tabs and share text", async
   await expect(page.locator("a.tab.is-done")).toHaveCount(3);
 
   const lines = (await page.getByTestId("share-text").innerText()).split("\n");
-  expect(lines[0]).toMatch(/^Ten a Day · (Sun|Mon|Tue|Wed|Thu|Fri|Sat), \d{1,2} [A-Z][a-z]{2}$/);
+  expect(lines[0]).toMatch(/^Uberman · (Sun|Mon|Tue|Wed|Thu|Fri|Sat), \d{1,2} [A-Z][a-z]{2}$/);
   expect(lines[1]).toBe("3/10  ■■□□■□□□□□");
   expect(lines[2]).toBe(
     "Water, light, training, focus, sigh, late light, dim evening, dark sleep, food + walk, quiet time.",

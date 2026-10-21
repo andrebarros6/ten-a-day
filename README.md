@@ -1,4 +1,6 @@
-# Ten a Day
+# Uberman: Ten a Day
+
+Ten protocols a day to become über. The name plays on über, German for "over" or "super".
 
 A daily checklist for the ten protocols Andrew Huberman set out on The Diary Of A CEO (episode released 3 September 2026), with the research behind each one.
 

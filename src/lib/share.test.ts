@@ -3,7 +3,7 @@ import { m } from "./labels";
 import { shareDate, shareText, shareUrl, squares } from "./share";
 
 const base = {
-  name: "Ten a Day",
+  name: "Uberman",
   date: new Date(2026, 9, 11, 12, 0),
   listLine: m.share.listLine,
   question: m.share.question,
@@ -16,7 +16,7 @@ describe("share text", () => {
     const text = shareText({ ...base, mask, streak: 4, url: "https://example.org/?ref=abc1234" });
     expect(text).toBe(
       [
-        "Ten a Day · Sun, 11 Oct",
+        "Uberman · Sun, 11 Oct",
         "7/10  ■■■□■■■□□■",
         "Streak: 4 days",
         "Water, light, training, focus, sigh, late light, dim evening, dark sleep, food + walk, quiet time.",

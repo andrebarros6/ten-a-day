@@ -6,6 +6,7 @@
     "about": "About"
   },
   "masthead": {
+    "tagline": "Ten a Day: ten protocols a day to become über.",
     "sub": "A daily checklist for the ten protocols Andrew Huberman set out on The Diary Of A CEO, with the research behind each one. Unofficial.",
     "streak": "Streak",
     "day": "day",
@@ -176,7 +177,7 @@
     "deleteTitle": "Delete your data",
     "deleteBody": "This removes your times, every tick and your share code from this browser. It cannot be undone. Data in other browsers or devices is not affected, because they do not share anything.",
     "deleteButton": "Delete my data on this device",
-    "deleteConfirm": "Delete all Ten a Day data stored in this browser?",
+    "deleteConfirm": "Delete all Uberman data stored in this browser?",
     "deleted": "Deleted. Nothing from this app is stored in this browser now."
   },
   "terms": {
@@ -186,7 +187,7 @@
       {
         "title": "What this is",
         "body": [
-          "Ten a Day is a free, unofficial checklist and reading list. It is not affiliated with, endorsed by or connected to Andrew Huberman, Steven Bartlett or their companies. All text is an original summary."
+          "Uberman is a free, unofficial checklist and reading list. The name plays on über, German for \"over\" or \"super\". It is not affiliated with, endorsed by or connected to Andrew Huberman, Steven Bartlett or their companies. All text is an original summary."
         ]
       },
       {
