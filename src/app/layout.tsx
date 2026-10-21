@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import Link from "next/link";
 import { Streak, Tabs } from "@/components/chrome";
+import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { meta } from "@/lib/content";
 import { m } from "@/lib/labels";
@@ -38,8 +39,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body>
         <div className="mx-auto max-w-[780px] px-[18px] pt-5 pb-14">
-          <header className="flex flex-wrap items-end justify-between gap-4">
-            <div>
+          <header className="flex items-start justify-between gap-4">
+            <div className="min-w-0">
               <Link
                 href="/"
                 className="font-display text-[clamp(34px,9vw,52px)] leading-[1.12] font-bold tracking-[-0.02em] text-ink no-underline"
@@ -51,7 +52,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               </p>
               <p className="mt-1.5 max-w-[46ch] text-[15px] text-muted">{m.masthead.sub}</p>
             </div>
-            <Streak />
+            <div className="flex shrink-0 flex-col items-end gap-3">
+              <Logo className="size-[clamp(64px,16vw,96px)]" />
+              <Streak />
+            </div>
           </header>
 
           <Tabs />
